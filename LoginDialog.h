@@ -1,7 +1,5 @@
 #pragma once
 #include "resource.h"
-#include "settings.h"
-#include "microsipDlg.h"
 
 // CLoginDialog dialog
 class CLoginDialog : public CDialog
@@ -11,17 +9,10 @@ class CLoginDialog : public CDialog
 public:
 	CLoginDialog(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CLoginDialog();
-	afx_msg void OnBnClickedCancel();
+
 // Dialog Data
 	enum { IDD = IDD_LOGIN };
 	CString caption;
-	void Load(int id);
-	CWnd* pParent;
-//API funcs
-	bool requestPassword(void);
-	bool registration(void);
-	bool pinReminder(void);
-
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -36,11 +27,4 @@ public:
 	afx_msg void OnBnClickedLoginbtn();
 	afx_msg void OnBnClickedPinrem();
 	afx_msg void OnBnClickedRegister();
-	afx_msg void OnEnSetfocusPhone();
-	afx_msg void OnEnSetfocusPassword();
-	afx_msg void OnBnClickedBack();
-private:
-	int accountId;
-	Account m_Account;
-	
 };

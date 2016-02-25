@@ -5,9 +5,7 @@
 #include "stdafx.h"
 #include "microsip.h"
 #include "microsipDlg.h"
-
 #include "LoginDialog.h"
-
 #include "const.h"
 #include "settings.h"
 
@@ -110,17 +108,10 @@ BOOL CmicrosipApp::InitInstance()
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
 	AfxInitRichEdit2();
+
 	CmicrosipDlg *microsipDlg = new CmicrosipDlg;
 	m_pMainWnd = microsipDlg;
 	hGlobal = m_pMainWnd->m_hWnd;
-
-	CLoginDialog* dlg = new CLoginDialog(microsipDlg);
-	if(dlg->DoModal()>1)
-		m_pMainWnd->DestroyWindow();
-
-	//microsipDlg->AccountSettingsPendingSave();
-	//microsipDlg->PJAccountAdd();
-	microsipDlg->onPowerBroadcast(PBT_APMRESUMEAUTOMATIC, NULL);
 
 	//--
 	LRESULT pResult;
@@ -148,15 +139,14 @@ BOOL CmicrosipApp::InitInstance()
 #ifdef _GLOBAL_MINIMIZED
 	m_pMainWnd->ShowWindow(SW_HIDE);
 #else
-
-#endif
-	m_pMainWnd->ShowWindow(SW_HIDE);
-	//microsipDlg->onPowerBroadcast(PBT_APMRESUMEAUTOMATIC, NULL);
-
-//	accountSettings.Init();
-	if (!microsipDlg->m_startMinimized) {
-		m_pMainWnd->ShowWindow(SW_SHOW);
+	if (microsipDlg->m_startMinimized) {
+		m_pMainWnd->ShowWindow(SW_HIDE);
 	}
+#endif
+
+	microsipDlg->onPowerBroadcast(PBT_APMRESUMEAUTOMATIC, NULL);
+	CLoginDialog* dlg = new CLoginDialog(microsipDlg);
+	dlg->DoModal();
 
 	//--
 

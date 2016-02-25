@@ -10,13 +10,13 @@
 
 #ifdef NDEBUG
 #ifdef _GLOBAL_VIDEO
-#pragma comment(lib, "libpjproject-i386-Win32-vc8-Release.lib")
+#pragma comment(lib, "libpjproject-i386-Win32-vc8-Release-Static-Video.lib")
 #else
 #pragma comment(lib, "libpjproject-i386-Win32-vc8-Release-Static-NoVideo.lib")
 #endif
 #else
 #ifdef _GLOBAL_VIDEO
-#pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug.lib")
+#pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug-Static-Video.lib")
 #else
 #pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug-Static-NoVideo.lib")
 #endif
@@ -52,12 +52,12 @@ class CmicrosipDlg : public CBaseDialog
 public:
 	CmicrosipDlg(CWnd* pParent = NULL);	// standard constructor
 	~CmicrosipDlg();
-	
 
 	// Dialog Data
 	enum { IDD = IDD_MICROSIP };
 
 	bool m_startMinimized;
+
 #ifndef _GLOBAL_NO_SETTINGS
 	SettingsDlg* settingsDlg;
 #endif

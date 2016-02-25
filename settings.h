@@ -1,8 +1,7 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
 #pragma once
 
 #include "global.h"
+
 struct Account {
 #ifdef _GLOBAL_PROFILE
 	CString profile;
@@ -11,7 +10,6 @@ struct Account {
 	CString proxy;
 	CString username;
 	CString domain;
-	int Country;
 	int port;
 	CString authID;
 	CString password;
@@ -36,6 +34,7 @@ struct Account {
 struct AccountSettings {
 
 	int accountId;
+
 	Account account;
 
 	CString userAgent;
@@ -107,4 +106,3 @@ struct AccountSettings {
 extern AccountSettings accountSettings;
 extern bool firstRun;
 extern bool pj_ready;
-#endif
