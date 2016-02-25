@@ -6,6 +6,7 @@ local_port public_addr stun
 #include "stdafx.h"
 #include "microsip.h"
 #include "microsipDlg.h"
+#include "LoginDialog.h"
 #include "Mmsystem.h"
 #include "settings.h"
 #include "global.h"
@@ -13,7 +14,7 @@ local_port public_addr stun
 #include "utf.h"
 #include "jumplist.h"
 #include "atlenc.h"
-#include "LoginForm.h"
+
 
 #include <io.h>
 #include <afxinet.h>
@@ -641,7 +642,7 @@ static void on_nat_detect(const pj_stun_nat_detect_result *res)
 						if (pjsua_acc_modify (account, &acc_cfg)==PJ_SUCCESS) {
 							message = _T("STUN was automatically disabled.");
 #ifndef _GLOBAL_CUSTOM
-							message.Append(_T(" For more info visit Microtalk-NG website, help page."));
+							message.Append(_T(" For more info visit MicroSIP website, help page."));
 #endif
 
 						}
@@ -846,7 +847,7 @@ BEGIN_MESSAGE_MAP(CmicrosipDlg, CBaseDialog)
 	ON_MESSAGE(MYWM_CALL_HANGUP,onCallHangup)
 	ON_MESSAGE(MYWM_SET_PANE_TEXT,onSetPaneText)
 #ifndef _GLOBAL_NO_ACCOUNT
-	ON_COMMAND(ID_ACCOUNT_ADD,OnLogin)
+	ON_COMMAND(ID_ACCOUNT_ADD,OnMenuAccountAdd)
 	ON_COMMAND_RANGE(ID_ACCOUNT_CHANGE_RANGE,ID_ACCOUNT_CHANGE_RANGE+99,OnMenuAccountChange)
 	ON_COMMAND_RANGE(ID_ACCOUNT_EDIT_RANGE,ID_ACCOUNT_EDIT_RANGE+99,OnMenuAccountEdit)
 #endif
@@ -871,11 +872,10 @@ void CmicrosipDlg::OnBnClickedOk()
 }
 
 CmicrosipDlg::CmicrosipDlg(CWnd* pParent /*=NULL*/)
-: CBaseDialog(CmicrosipDlg::IDD, pParent)
+: CBaseDialog(CmicrosipDlg::IDD, pParent) 
 {
 	this->m_hWnd = NULL;
 	microsipDlg = this;
-
 	m_tabPrev = -1;
 
 	Create (IDD, pParent);
@@ -917,6 +917,7 @@ BOOL CmicrosipDlg::OnInitDialog()
 #ifdef _GLOBAL_VIDEO
 	previewWin = NULL;
 #endif
+
 
 	SetTimer(IDT_TIMER_0,5000,NULL);
 
@@ -1054,7 +1055,7 @@ BOOL CmicrosipDlg::OnInitDialog()
 	tabItem.mask = TCIF_TEXT | TCIF_PARAM;
 
 	pageDialer = new Dialer(this);
-	tabItem.pszText = Translate(_T("Call"));
+	tabItem.pszText = Translate(_T("Dialpad"));
 	tabItem.lParam = (LPARAM)pageDialer;
 	tab->InsertItem( 99, &tabItem );
 	pageDialer->SetWindowPos(NULL, 0, 32, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
@@ -1062,7 +1063,7 @@ BOOL CmicrosipDlg::OnInitDialog()
 
 #ifndef _GLOBAL_NO_CALLS
 	pageCalls = new Calls(this);
-	tabItem.pszText = Translate(_T("Recents"));
+	tabItem.pszText = Translate(_T("Calls"));
 	tabItem.lParam = (LPARAM)pageCalls;
 	tab->InsertItem( 99, &tabItem );
 	pageCalls->SetWindowPos(NULL, 0, 32, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
@@ -1078,13 +1079,6 @@ BOOL CmicrosipDlg::OnInitDialog()
 	AutoMove(pageContacts->m_hWnd,0,0,100,100);
 #endif
 
-			LoginForm *dlg = new LoginForm(this);
-			tabItem.pszText = Translate(_T("Call"));
-			tabItem.lParam = (LPARAM)dlg;
-			tab->InsertItem( 99, &tabItem );
-			dlg->SetWindowPos(NULL, 0, 32, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-			AutoMove(pageDialer->m_hWnd,50,50,0,0);
-
 #ifdef _GLOBAL_PAGE_BUTTONS
 	pageButtons = new Buttons(this);
 	tabItem.pszText = Translate(_T("Language"));
@@ -1096,14 +1090,14 @@ BOOL CmicrosipDlg::OnInitDialog()
 
 #ifndef _GLOBAL_NO_ACCOUNT
 #ifndef _GLOBAL_TAB_ACCOUNT
-	tabItem.pszText = Translate(_T("More"));
+	tabItem.pszText = Translate(_T("Menu"));
 #else
 	tabItem.pszText = _T("$");
 #endif
 	tabItem.lParam = -1;
 	tab->InsertItem( 99, &tabItem );
 #endif
-#ifdef _GLOBAL_TAB_HELP1111
+#ifdef _GLOBAL_TAB_HELP
 	tabItem.pszText = _T("?");
 	tabItem.lParam = -2;
 	tab->InsertItem( 99, &tabItem );
@@ -1149,12 +1143,12 @@ void CmicrosipDlg::BaloonPopup(CString title, CString message, DWORD flags)
 }
 
 #ifndef _GLOBAL_NO_ACCOUNT
-void CmicrosipDlg::OnLogin()
+void CmicrosipDlg::OnMenuAccountAdd()
 {
-	//if (!accountSettings.hidden) {
-
-//		dlg->Load(0);
-	//}
+	if (!accountSettings.hidden) {
+		AccountDlg *dlg = new AccountDlg(this);
+		dlg->Load(0);
+	}
 }
 void CmicrosipDlg::OnMenuAccountChange(UINT nID)
 {
@@ -2749,7 +2743,7 @@ jl.DeleteJumpList();
 void CmicrosipDlg::OnMenuWebsite()
 {
 #ifndef _GLOBAL_CUSTOM
-	OpenURL(_T("http://www.microtalk.com/"));
+	OpenURL(_T("http://www.microtalkng.com/"));
 #endif
 #ifdef _GLOBAL_MENU_WEBSITE
 	CString url;
@@ -2884,7 +2878,7 @@ void CmicrosipDlg::CheckUpdates()
 		url = _GLOBAL_UPDATES_URL;
 #endif
 #else
-		CString url = _T("http://microtalk.com");
+		CString url = _T("http://update.microtalkng.com/?version=");
 #endif
 		url.Append(_T(_GLOBAL_VERSION));
 #ifndef _GLOBAL_VIDEO
@@ -2915,7 +2909,7 @@ void CmicrosipDlg::CheckUpdates()
 						OpenURL(Utf8DecodeUni(data));
 					}
 #else
-					OpenURL(_T("http://microtalk.com"));
+					OpenURL(_T("http://www.microtalkng.com/downloads"));
 #endif
 				}
 			}

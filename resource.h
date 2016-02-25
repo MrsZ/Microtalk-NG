@@ -60,6 +60,11 @@
 #define IDI_VIDEO                       178
 #define IDB_LOGO                        182
 #define IDB_BITMAP2                     183
+#define IDD_FORMVIEW                    187
+#define IDD_LOGINFORM                   187
+#define IDB_PNG1                        188
+#define IDB_BITMAP1                     189
+#define IDR_ACCELERATOR1                190
 #define IDC_ANSWER                      1000
 #define IDC_ATTENDED_TRANSFER           1001
 #define IDC_ANSWER_BOX_RANDOM           1002
@@ -208,6 +213,9 @@
 #define IDC_COUNTRY                     1148
 #define IDC_PHONE                       1149
 #define IDC_PASSWORD                    1150
+#define IDC_EMAIL                       1151
+#define IDC_PASSWORD2                   1152
+#define IDC_NAME                        1152
 #define IDC_LOGTEXT                     1153
 #define IDC_BUTTON1                     1155
 #define IDC_LoginBTN                    1155
@@ -218,6 +226,7 @@
 #define IDC_EDIT2                       1159
 #define IDC_CountryCode                 1159
 #define IDC_LOGO                        1160
+#define IDC_BACK                        1162
 #define ID_ACCOUNT_ADD                  32771
 #define ID_ADD                          32775
 #define ID_ALWAYS_ON_TOP                32776
@@ -235,6 +244,7 @@
 #define ID_SETTINGS                     32789
 #define ID_VIDEOCALL                    32790
 #define ID_WEBSITE                      32791
+#define ID_ACCELERATOR32792             32792
 #define ID_ACCOUNT_CHANGE_RANGE         40000
 #define ID_ACCOUNT_EDIT_RANGE           40100
 #define ID_ATTENDED_TRANSFER_RANGE      40200
@@ -243,9 +253,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        185
-#define _APS_NEXT_COMMAND_VALUE         32792
-#define _APS_NEXT_CONTROL_VALUE         1161
+#define _APS_NEXT_RESOURCE_VALUE        191
+#define _APS_NEXT_COMMAND_VALUE         32794
+#define _APS_NEXT_CONTROL_VALUE         1163
 #define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

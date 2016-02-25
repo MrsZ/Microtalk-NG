@@ -12,13 +12,13 @@
 #ifdef _GLOBAL_VIDEO
 #pragma comment(lib, "libpjproject-i386-Win32-vc8-Release.lib")
 #else
-#pragma comment(lib, "libpjproject-i386-Win32-vc8-Release-NoVideo.lib")
+#pragma comment(lib, "libpjproject-i386-Win32-vc8-Release-Static-NoVideo.lib")
 #endif
 #else
 #ifdef _GLOBAL_VIDEO
 #pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug.lib")
 #else
-#pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug-NoVideo.lib")
+#pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug-Static-NoVideo.lib")
 #endif
 #endif
 
@@ -52,12 +52,12 @@ class CmicrosipDlg : public CBaseDialog
 public:
 	CmicrosipDlg(CWnd* pParent = NULL);	// standard constructor
 	~CmicrosipDlg();
+	
 
 	// Dialog Data
 	enum { IDD = IDD_MICROSIP };
 
 	bool m_startMinimized;
-
 #ifndef _GLOBAL_NO_SETTINGS
 	SettingsDlg* settingsDlg;
 #endif
@@ -200,7 +200,7 @@ public:
 	afx_msg LRESULT onSetPaneText(WPARAM wParam,LPARAM lParam);
 	afx_msg LRESULT onPlayerPlay(WPARAM wParam,LPARAM lParam);
 #ifndef _GLOBAL_NO_ACCOUNT
-	afx_msg void OnLogin();
+	afx_msg void OnMenuAccountAdd();
 	afx_msg void OnMenuAccountChange(UINT nID);
 	afx_msg void OnMenuAccountEdit(UINT nID);
 #endif
