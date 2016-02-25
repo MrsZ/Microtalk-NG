@@ -6,6 +6,7 @@ local_port public_addr stun
 #include "stdafx.h"
 #include "microsip.h"
 #include "microsipDlg.h"
+#include "LoginDialog.h"
 #include "Mmsystem.h"
 #include "settings.h"
 #include "global.h"
@@ -871,11 +872,10 @@ void CmicrosipDlg::OnBnClickedOk()
 }
 
 CmicrosipDlg::CmicrosipDlg(CWnd* pParent /*=NULL*/)
-: CBaseDialog(CmicrosipDlg::IDD, pParent)
+: CBaseDialog(CmicrosipDlg::IDD, pParent) 
 {
 	this->m_hWnd = NULL;
 	microsipDlg = this;
-
 	m_tabPrev = -1;
 
 	Create (IDD, pParent);
@@ -917,6 +917,7 @@ BOOL CmicrosipDlg::OnInitDialog()
 #ifdef _GLOBAL_VIDEO
 	previewWin = NULL;
 #endif
+
 
 	SetTimer(IDT_TIMER_0,5000,NULL);
 

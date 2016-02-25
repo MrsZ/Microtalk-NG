@@ -534,6 +534,28 @@ bool AccountSettings::AccountLoad(int id, Account *account)
 	account->authID.ReleaseBuffer();
 #endif
 
+#ifdef _GLOBAL_ACCOUNT_COUNTRY
+#ifdef _GLOBAL_ACCOUNT_OVERRIDE
+	char country[5];
+	GetPrivateProfileString(section,_T("Country"), NULL, (LPTSTR)country,5, iniFile);
+	account->Country=atoi(country);	
+
+#else
+	account->authID = _T(_GLOBAL_ACCOUNT_COUNTRY);
+#endif
+#else
+	//CString str;
+	//str.Format(_T("%d"),account->Country);
+	//WritePrivateProfileString(section,_T("port"),str,iniFile);
+	//GetPrivateProfileString(section,_T("Country"), NULL, str, 256, iniFile);
+
+	LPTSTR country = new TCHAR[256];
+	GetPrivateProfileString(section,_T("Country"), NULL, country,256, iniFile);
+	account->Country=_ttoi(country);
+	delete[] country;
+
+#endif
+
 	CString usernameLocal;
 	CString passwordLocal;
 
@@ -747,6 +769,7 @@ bool AccountSettings::AccountLoad(int id, Account *account)
 		// delete old
 		WritePrivateProfileString(section,_T("server"), NULL, iniFile);
 		WritePrivateProfileString(section,_T("proxy"), NULL, iniFile);
+		WritePrivateProfileString(section,_T("Country"), NULL, iniFile);
 		WritePrivateProfileString(section,_T("SRTP"), NULL, iniFile);
 		WritePrivateProfileString(section,_T("transport"), NULL, iniFile);
 		WritePrivateProfileString(section,_T("publicAddr"), NULL, iniFile);
@@ -761,6 +784,7 @@ bool AccountSettings::AccountLoad(int id, Account *account)
 		WritePrivateProfileString(section,_T("password"), NULL, iniFile);
 		WritePrivateProfileString(section,_T("id"), NULL, iniFile);
 		WritePrivateProfileString(section,_T("displayName"), NULL, iniFile);
+		WritePrivateProfileString(section,_T("Country"), NULL, iniFile);
 		// save new
 		//if (!account->domain.IsEmpty() && !account->username.IsEmpty()) {
 		if (sectionExists && !account->domain.IsEmpty()) {
@@ -786,6 +810,12 @@ void AccountSettings::AccountSave(int id, Account *account)
 
 #if !defined _GLOBAL_ACCOUNT_SIP_PROXY || defined _GLOBAL_ACCOUNT_OVERRIDE
 	WritePrivateProfileString(section,_T("proxy"),account->proxy,iniFile);
+#endif
+
+#if !defined _GLOBAL_ACCOUNT_COUNTRY || defined _GLOBAL_ACCOUNT_OVERRIDE
+	wchar_t buffer[256];
+	wsprintfW(buffer, L"%d", account->Country);
+	WritePrivateProfileString(section,_T("Country"),buffer,iniFile);
 #endif
 
 #if !defined _GLOBAL_ACCOUNT_DOMAIN || defined _GLOBAL_ACCOUNT_OVERRIDE

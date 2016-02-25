@@ -67,17 +67,40 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Accelerator
+//
+
+IDR_ACCELERATOR1 ACCELERATORS 
+BEGIN
+    "8",            ID_ACCELERATOR32792,    VIRTKEY, NOINVERT
+END
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // Dialog
 //
 
 IDD_LOGIN DIALOGEX 0, 0, 203, 185
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CTEXT           "Log In",IDC_LOGTEXT,7,7,189,30
     COMBOBOX        IDC_COUNTRY,21,43,162,12,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_PHONE,66,66,117,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PHONE,66,66,117,15,ES_AUTOHSCROLL | ES_NUMBER
     EDITTEXT        IDC_PASSWORD,65,89,118,15,ES_AUTOHSCROLL
     PUSHBUTTON      "Log In",IDC_LoginBTN,19,113,163,17
     PUSHBUTTON      "Pin Reminder",IDC_PinRem,20,133,163,17
@@ -86,6 +109,7 @@ BEGIN
     CONTROL         182,IDC_LOGO,"Static",SS_BITMAP | SS_REALSIZEIMAGE,63,0,77,71
     EDITTEXT        IDC_EMAIL,20,112,163,15,ES_AUTOHSCROLL
     EDITTEXT        IDC_NAME,20,89,163,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "Back",IDC_BACK,7,7,50,14,NOT WS_VISIBLE
 END
 
 
@@ -107,18 +131,6 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // Russian resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
