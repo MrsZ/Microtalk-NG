@@ -55,14 +55,51 @@ BEGIN
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
     "#include ""res\\microsip.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
-    "#include ""res\\dialog.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
-    "#include ""res\\menu.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#include ""afxres.rc""     // Standard components\r\n"
     "#endif\r\n"
     "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_CONTACT MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Call",                        ID_CALL
+        MENUITEM "Video call",                  ID_VIDEOCALL
+        MENUITEM "SMS",                         ID_CHAT
+        MENUITEM SEPARATOR
+        MENUITEM "Add",                         ID_ADD
+        MENUITEM "Edit",                        ID_EDIT
+        MENUITEM "Copy",                        ID_COPY
+        MENUITEM "Delete",                      ID_DELETE
+    END
+END
+
+IDR_MENU_MESSAGES MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Copy",                        ID_COPY
+        MENUITEM "Select All",                  ID_SELECT_ALL
+    END
+END
+
+IDR_MENU_TABS MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Last Call",                   ID_GOTOLASTTAB
+        MENUITEM "Close All",                   ID_CLOSEALLTABS
+    END
+END
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -75,7 +112,305 @@ BEGIN
     "8",            ID_ACCELERATOR32792,    VIRTKEY, NOINVERT
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MICROSIP DIALOGEX 0, 0, 178, 217
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TAB,"SysTabControl32",TCS_BUTTONS | 0x8,0,3,178,16
+END
+
+IDD_ACCOUNT DIALOGEX 0, 0, 236, 303
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Account"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    RTEXT           "SIP server",-1,7,10,70,8
+    EDITTEXT        IDC_EDIT_SERVER,86,7,127,14,ES_AUTOHSCROLL
+    RTEXT           "SIP proxy",-1,7,29,70,8
+    EDITTEXT        IDC_EDIT_PROXY,86,26,127,14,ES_AUTOHSCROLL
+    RTEXT           "User",-1,7,55,70,8
+    LTEXT           "*",-1,78,55,8,5
+    EDITTEXT        IDC_EDIT_USERNAME,86,52,127,14,ES_AUTOHSCROLL
+    RTEXT           "Domain",-1,7,74,70,8
+    LTEXT           "*",-1,78,74,8,5
+    EDITTEXT        IDC_EDIT_DOMAIN,86,71,127,14,ES_AUTOHSCROLL
+    RTEXT           "Login",-1,7,93,70,8
+    EDITTEXT        IDC_EDIT_AUTHID,86,90,127,14,ES_AUTOHSCROLL
+    RTEXT           "Pin",-1,7,112,70,8
+    EDITTEXT        IDC_EDIT_PASSWORD,86,109,127,14,ES_PASSWORD | ES_AUTOHSCROLL
+    CONTROL         "",IDC_SYSLINK_DISPLAY_PASSWORD,"SysLink",WS_TABSTOP,86,125,120,8
+    RTEXT           "Display name",-1,7,143,70,8
+    EDITTEXT        IDC_EDIT_DISPLAYNAME,86,140,127,14,ES_AUTOHSCROLL
+    RTEXT           "Media encryption",-1,7,161,70,8
+    COMBOBOX        IDC_SRTP,86,158,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    RTEXT           "Transport",-1,7,179,70,8
+    COMBOBOX        IDC_TRANSPORT,86,176,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    RTEXT           "Public address",-1,7,198,70,8
+    COMBOBOX        IDC_PUBLIC_ADDR,86,195,127,30,CBS_DROPDOWN | WS_VSCROLL
+    CONTROL         "Publish presence",IDC_PUBLISH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,86,215,127,10
+    RTEXT           "STUN server",-1,7,238,70,8
+    EDITTEXT        IDC_STUN,85,235,127,14,ES_AUTOHSCROLL
+    CONTROL         "ICE",IDC_ICE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,86,252,127,10
+    CONTROL         "Allow IP rewrite",IDC_REWRITE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,86,267,127,10
+    CONTROL         "",IDC_SYSLINK_DELETE,"SysLink",WS_TABSTOP,12,287,70,14
+    DEFPUSHBUTTON   "Save",1,83,284,70,14
+    PUSHBUTTON      "Cancel",2,158,284,70,14
+    CONTROL         "<a>?</a>",IDC_SYSLINK_SIP_SERVER,"SysLink",0x0,222,9,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_SIP_PROXY,"SysLink",0x0,222,28,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_USERNAME,"SysLink",0x0,222,55,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_DOMAIN,"SysLink",0x0,222,73,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_AUTHID,"SysLink",0x0,222,92,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_PASSWORD,"SysLink",0x0,222,112,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_NAME,"SysLink",0x0,222,142,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_ENCRYPTION,"SysLink",0x0,222,160,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_TRANSPORT,"SysLink",0x0,222,178,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_PUBLIC_ADDRESS,"SysLink",0x0,222,197,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_PUBLISH_PRESENCE,"SysLink",0x0,222,215,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_STUN_SERVER,"SysLink",0x0,222,238,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_ICE,"SysLink",0x0,222,252,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_REWRITE,"SysLink",0x0,222,267,7,8
+END
+
+IDD_ADD DIALOGEX 0, 0, 181, 85
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Contact"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_NUMBER,51,7,123,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_NAME,51,26,123,14,ES_AUTOHSCROLL
+    RTEXT           "Number",-1,7,9,40,8
+    RTEXT           "Name",-1,7,28,40,8
+    CONTROL         "Presence subscription",IDC_PRESENCE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,51,46,123,10
+    DEFPUSHBUTTON   "OK",1,30,64,70,14
+    PUSHBUTTON      "Cancel",2,105,64,70,14
+END
+
+IDD_CALLS DIALOGEX 0, 0, 177, 159
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_CALLS,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,0,177,159
+END
+
+IDD_CONTACTS DIALOGEX 0, 0, 177, 159
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_CONTACTS,"SysListView32",LVS_LIST | LVS_SORTASCENDING | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,0,0,177,159
+END
+
+IDD_DIALER DIALOGEX 0, 0, 178, 184
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+EXSTYLE WS_EX_STATICEDGE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_NUMBER,9,24,162,30,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL
+    PUSHBUTTON      "Call",IDC_CALL,25,153,99,18,WS_DISABLED
+    PUSHBUTTON      "Video call",IDC_VIDEO_CALL,20,153,23,18,BS_ICON | WS_DISABLED
+    PUSHBUTTON      "Message",IDC_MESSAGE,127,153,23,18,BS_ICON | WS_DISABLED
+    PUSHBUTTON      "End call",IDC_END,47,153,82,18,NOT WS_VISIBLE
+    PUSHBUTTON      "Transfer",IDC_TRANSFER,20,153,23,18,BS_ICON | NOT WS_VISIBLE | WS_DISABLED
+    CHECKBOX        "Hold",IDC_HOLD,132,153,23,18,BS_ICON | BS_PUSHLIKE | NOT WS_VISIBLE | WS_DISABLED
+    CONTROL         "1",IDC_KEY_1,"Button",BS_OWNERDRAW | WS_TABSTOP,25,49,39,18
+    CONTROL         "2",IDC_KEY_2,"Button",BS_OWNERDRAW | WS_TABSTOP,68,49,39,18
+    CONTROL         "3",IDC_KEY_3,"Button",BS_OWNERDRAW | WS_TABSTOP,111,49,39,18
+    CONTROL         "4",IDC_KEY_4,"Button",BS_OWNERDRAW | WS_TABSTOP,25,70,39,18
+    CONTROL         "5",IDC_KEY_5,"Button",BS_OWNERDRAW | WS_TABSTOP,68,70,39,18
+    CONTROL         "6",IDC_KEY_6,"Button",BS_OWNERDRAW | WS_TABSTOP,111,70,39,18
+    CONTROL         "7",IDC_KEY_7,"Button",BS_OWNERDRAW | WS_TABSTOP,25,91,39,18
+    CONTROL         "8",IDC_KEY_8,"Button",BS_OWNERDRAW | WS_TABSTOP,68,91,39,18
+    CONTROL         "9",IDC_KEY_9,"Button",BS_OWNERDRAW | WS_TABSTOP,111,91,39,18
+    CONTROL         "0",IDC_KEY_0,"Button",BS_OWNERDRAW | WS_TABSTOP,68,112,39,18
+    CONTROL         "*",IDC_KEY_STAR,"Button",BS_OWNERDRAW | WS_TABSTOP,25,112,39,18
+    CONTROL         "#",IDC_KEY_GRATE,"Button",BS_OWNERDRAW | WS_TABSTOP,111,112,39,18
+    CONTROL         "+",IDC_KEY_PLUS,"Button",BS_OWNERDRAW | WS_TABSTOP,68,133,39,18
+    CONTROL         "<",IDC_DELETE,"Button",BS_OWNERDRAW | WS_TABSTOP,25,133,39,18
+    CONTROL         "C",IDC_CLEAR,"Button",BS_OWNERDRAW | WS_TABSTOP,111,133,39,18
+    CTEXT           "+",-1,4,51,16,8
+    CONTROL         "",IDC_VOLUME_INPUT,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,4,59,20,60
+    CTEXT           "-",-1,4,120,16,8
+    CONTROL         "Mute microphone",IDC_BUTTON_MUTE_INPUT,"Button",BS_AUTOCHECKBOX | BS_ICON | BS_PUSHLIKE | BS_FLAT | WS_TABSTOP,4,134,16,16
+    CTEXT           "+",-1,155,51,16,8
+    CONTROL         "",IDC_VOLUME_OUTPUT,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,155,59,20,60
+    CTEXT           "-",-1,155,120,16,8
+    CONTROL         "Mute speaker",IDC_BUTTON_MUTE_OUTPUT,"Button",BS_AUTOCHECKBOX | BS_ICON | BS_PUSHLIKE | BS_FLAT | WS_TABSTOP,155,134,16,16
+    LTEXT           "",IDC_BALANCE,24,3,127,19,SS_SUNKEN | WS_BORDER,WS_EX_STATICEDGE
+END
+
+IDD_MESSAGES DIALOGEX 0, 0, 224, 90
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TAB,"SysTabControl32",WS_TABSTOP,0,3,113,14
+    PUSHBUTTON      "Last Call",IDC_LAST_CALL,118,3,50,14
+    PUSHBUTTON      "Close All",IDC_CLOSE_ALL,172,3,50,14
+    PUSHBUTTON      "Call",IDC_CALL_END,4,21,70,14
+    PUSHBUTTON      "Video call",IDC_VIDEO_CALL,78,21,70,14
+    CHECKBOX        "Hold",IDC_HOLD,92,21,18,14,BS_ICON | BS_PUSHLIKE | NOT WS_VISIBLE
+    PUSHBUTTON      "Attended transfer",IDC_ATTENDED_TRANSFER,112,21,18,14,BS_ICON | NOT WS_VISIBLE
+    PUSHBUTTON      "Blind transfer",IDC_TRANSFER,132,21,18,14,BS_ICON | NOT WS_VISIBLE
+    PUSHBUTTON      "End call",IDC_END,152,21,70,14,NOT WS_VISIBLE
+    CONTROL         "Messages list",IDC_LIST,"RichEdit20W",WS_VSCROLL | WS_TABSTOP | 0x2804,1,38,222,32,WS_EX_STATICEDGE
+    CONTROL         "Enter message",IDC_MESSAGE,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_TABSTOP | 0x84,1,74,221,15
+END
+
+IDD_RINGIN DIALOGEX 0, 0, 180, 138
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Incoming call"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CTEXT           "",IDC_CALLER_NAME,5,14,170,16
+    PUSHBUTTON      "Answer",IDC_ANSWER,5,109,82,14
+    PUSHBUTTON      "Decline",IDC_DECLINE,93,109,82,14
+    CTEXT           "close window to ignore call",IDC_IGNORE,5,129,170,8
+    EDITTEXT        IDC_CALLER_ADDR,5,36,170,64,ES_CENTER | ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_SETTINGS DIALOGEX 0, 0, 255, 285
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Settings"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    RTEXT           "Ringing Sound",-1,7,6,90,8
+    EDITTEXT        IDC_RINGING_SOUND,106,3,99,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BROWSE,205,3,14,14
+    PUSHBUTTON      "X",IDC_DEFAULT,219,3,14,14,WS_DISABLED
+    RTEXT           "Ring device",-1,7,21,90,8
+    COMBOBOX        IDC_RING,106,19,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    RTEXT           "Speaker",-1,7,36,90,8
+    COMBOBOX        IDC_SPEAKERS,106,34,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    RTEXT           "Microphone",-1,7,51,90,8
+    COMBOBOX        IDC_MICROPHONE,106,49,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    RTEXT           "Audio codecs",-1,7,66,90,8
+    LTEXT           "Available",-1,71,77,76,8
+    LISTBOX         IDC_AUDIO_CODECS_ALL,71,87,66,60,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_SPIN_MODIFY,"msctls_updown32",UDS_ARROWKEYS | UDS_HORZ,140,98,21,9
+    CONTROL         "",IDC_SPIN_ORDER,"msctls_updown32",UDS_ARROWKEYS,150,119,10,18
+    LTEXT           "Enabled",-1,172,77,76,8
+    LISTBOX         IDC_AUDIO_CODECS,166,87,66,60,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "VAD",IDC_VAD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,150,25,10
+    CONTROL         "EC",IDC_EC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,70,150,25,10
+    CONTROL         "Force codec for incoming",IDC_FORCE_CODEC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,150,130,10
+    RTEXT           "Auto answer",-1,7,165,90,8
+    COMBOBOX        IDC_AUTO_ANSWER,106,163,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    RTEXT           "Deny incoming",-1,7,180,90,8
+    COMBOBOX        IDC_DENY_INCOMING,106,178,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    RTEXT           "Directory of users",-1,7,195,90,8
+    EDITTEXT        IDC_DIRECTORY,106,193,127,14,ES_AUTOHSCROLL
+    CONTROL         "Sound events",IDC_LOCAL_DTMF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,211,105,10
+    CONTROL         "Single call mode",IDC_SINGLE_MODE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,222,105,10
+    CONTROL         "Enable log file",IDC_ENABLE_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,140,211,105,10
+    CONTROL         "Disable local account",IDC_DISABLE_LOCAL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,140,222,105,10
+    CONTROL         "Random position of the answer box",IDC_ANSWER_BOX_RANDOM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,234,220,10
+    RTEXT           "Check for updates",-1,7,247,90,8
+    COMBOBOX        IDC_UPDATES_INTERVAL,106,245,127,30,CBS_DROPDOWNLIST | WS_VSCROLL
+    CONTROL         "<a>?</a>",IDC_SYSLINK_RINGING_SOUND,"SysLink",0x0,241,5,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_AUDIO_CODECS,"SysLink",0x0,241,66,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_VAD,"SysLink",0x0,10,150,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_EC,"SysLink",0x0,60,150,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_FORCE_CODEC,"SysLink",0x0,110,150,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_AUTO_ANSWER,"SysLink",0x0,241,165,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_DENY_INCOMING,"SysLink",0x0,241,180,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_DIRECTORY,"SysLink",0x0,241,195,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_LOCAL_DTMF,"SysLink",0x0,10,211,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_SINGLE_MODE,"SysLink",0x0,10,222,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_ANSWER_BOX_RANDOM,"SysLink",0x0,10,234,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_ENABLE_LOG,"SysLink",0x0,130,211,7,8
+    CONTROL         "<a>?</a>",IDC_SYSLINK_DISABLE_LOCAL,"SysLink",0x0,130,222,7,8
+    DEFPUSHBUTTON   "Save",1,88,265,70,14
+    PUSHBUTTON      "Cancel",2,163,265,70,14
+END
+
+IDD_TRANSFER DIALOGEX 0, 0, 181, 53
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Call Transfer"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    RTEXT           "Number",-1,7,10,40,8
+    EDITTEXT        IDC_NUMBER,51,7,123,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",1,29,32,70,14
+    PUSHBUTTON      "Cancel",2,104,32,70,14
+END
+
+IDD_VOUCHER DIALOGEX 0, 0, 233, 79
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Redeem voucher "
+FONT 8, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    DEFPUSHBUTTON   "Submit",ID_VOUCH_SUB,91,58,50,14
+    CTEXT           "Static",IDC_STATUS,7,8,219,12
+    EDITTEXT        IDC_VOUCH_ID,7,30,219,14,ES_CENTER | ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MICROSIP, DIALOG
+    BEGIN
+        RIGHTMARGIN, 177
+        BOTTOMMARGIN, 216
+    END
+
+    IDD_DIALER, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 183
+    END
+
+    IDD_VOUCHER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 226
+        BOTTOMMARGIN, 72
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
 #endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral (Sys. Default) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUSD)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_SYS_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_TRAY MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Redeem Voucher",              ID_VOUCHER
+        MENUITEM "Add Credit",                  ID_CREDIT
+        MENUITEM "Conference call",             ID_CONF
+        MENUITEM SEPARATOR
+        MENUITEM "Exit\tCtrl+X",                ID_EXIT
+    END
+END
+
+#endif    // Neutral (Sys. Default) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -98,10 +433,10 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CTEXT           "Log In",IDC_LOGTEXT,7,7,189,30
+    CTEXT           "Log In",IDC_LOGTEXT,58,7,138,30
     COMBOBOX        IDC_COUNTRY,21,43,162,12,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     EDITTEXT        IDC_PHONE,66,66,117,15,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_PASSWORD,65,89,118,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWORD,65,89,118,15,ES_PASSWORD | ES_AUTOHSCROLL
     PUSHBUTTON      "Log In",IDC_LoginBTN,19,113,163,17
     PUSHBUTTON      "Pin Reminder",IDC_PinRem,20,133,163,17
     PUSHBUTTON      "Register",IDC_Register,20,153,163,17
@@ -110,6 +445,7 @@ BEGIN
     EDITTEXT        IDC_EMAIL,20,112,163,15,ES_AUTOHSCROLL
     EDITTEXT        IDC_NAME,20,89,163,15,ES_AUTOHSCROLL
     PUSHBUTTON      "Back",IDC_BACK,7,7,50,14,NOT WS_VISIBLE
+    CONTROL         "Save password",IDC_SAVE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_MULTILINE | NOT WS_VISIBLE | WS_TABSTOP,10,88,46,17
 END
 
 
@@ -168,8 +504,6 @@ END
 LANGUAGE 9, 1
 #pragma code_page(1252)
 #include "res\microsip.rc2"  // non-Microsoft Visual C++ edited resources
-#include "res\dialog.rc2"  // non-Microsoft Visual C++ edited resources
-#include "res\menu.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"     // Standard components
 #endif
 
