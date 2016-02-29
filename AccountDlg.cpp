@@ -2,6 +2,10 @@
 #include "AccountDlg.h"
 #include "microsipDlg.h"
 #include <ws2tcpip.h>
+#include "LoginDialog.h"
+#include <string>
+#include <afxinet.h>
+#include <sstream>
 
 #ifndef _GLOBAL_NO_ACCOUNT
 
@@ -38,7 +42,7 @@ BOOL AccountDlg::OnInitDialog()
 
 #if !defined _GLOBAL_ACCOUNT_PASSWORD && !defined _GLOBAL_NO_DISPLAY_PASSWORD
 #ifndef _GLOBAL_ACCOUNT_PIN
-	str.Format(_T("<a>%s</a>"),Translate(_T("display password")));
+	str.Format(_T("<a>%s</a>"),Translate(_T("display pin")));
 	GetDlgItem(IDC_SYSLINK_DISPLAY_PASSWORD)->SetWindowText(str);
 #else
 	str.Format(_T("<a>%s</a>"),Translate(_T("display Pin No")));
@@ -154,11 +158,12 @@ void AccountDlg::Load(int id)
 	CEdit* edit;
 	CComboBox *combobox;
 	accountId = id;
-	if (accountSettings.AccountLoad(id,&m_Account)) {
-		accountId = id;
-	} else {
-		accountId = 0;
-	}
+	m_Account=accountSettings.account;
+	//if (accountSettings.AccountLoad(id,&m_Account)) {
+	//	accountId = id;
+	//} else {
+	//	accountId = 0;
+	//}
 
 #ifndef _GLOBAL_ACCOUNT_SIP_SERVER
 	edit = (CEdit*)GetDlgItem(IDC_EDIT_SERVER);
@@ -364,11 +369,13 @@ void AccountDlg::OnBnClickedOk()
 	edit = (CEdit*)GetDlgItem(IDC_EDIT_PASSWORD);
 	edit->GetWindowText(str);
 #ifndef _GLOBAL_ACCOUNT_API
-	m_Account.password=str.Trim();
+	CString pin = m_Account.password=str.Trim();
 #else
 	m_Account.apiPassword=str.Trim();
 #endif
 #endif
+
+requestPassword();
 
 #ifdef _GLOBAL_ACCOUNT_API_ID
 	edit = (CEdit*)GetDlgItem(IDC_EDIT_API_ID);
@@ -476,7 +483,7 @@ void AccountDlg::OnBnClickedOk()
 		}
 		accountId = i;
 	}
-
+	m_Account.password= pin;
 	accountSettings.AccountSave(accountId,&m_Account);
 	
 	if (accountSettings.accountId) {
@@ -486,7 +493,7 @@ void AccountDlg::OnBnClickedOk()
 	accountSettings.account = m_Account;
 	accountSettings.SettingsSave();
 	microsipDlg->PJAccountAdd();
-
+	m_Account.password= pin;
 	OnClose();
 }
 
@@ -643,3 +650,47 @@ void AccountDlg::OnNMClickSyslinkReg(NMHDR *pNMHDR, LRESULT *pResult)
 #endif
 
 #endif
+
+
+bool AccountDlg::requestPassword(){
+	CString header = _T("Content-Type: application/x-www-form-urlencoded");
+	CInternetSession session;
+	CHttpConnection *pConnection = session.GetHttpConnection(_T("89.163.142.253"));
+	CHttpFile *pFile = pConnection->OpenRequest(CHttpConnection::HTTP_VERB_POST,_T("/oneworld/login"));
+	
+	std::string req="submit=1&number=";
+	req+=(CT2CA)m_Account.username;
+	req+="&pincode=";
+	req+=(CT2CA)m_Account.password;
+
+	long len = req.length();
+	BOOL res = pFile->SendRequest(header,lstrlen(header), (LPVOID)req.c_str(),len);
+	if(!res)
+		return !res;
+	//pFile
+	char result[500];
+	pFile->Read(result,500);
+	CString rest(result);
+	int start=rest.Find(_T("password\":\""));
+	if(start<0)
+		return false;
+	start+=((CString)_T("password\":\"")).GetLength();
+	int end=rest.Find(_T("\""),start);
+	if(end<0)
+		return false;
+	CString password=rest.Mid(start, end-start);
+
+
+	start=rest.Find(_T("fname\":\""));
+	if(start<0)
+		return false;
+	start+=((CString)_T("fname\":\"")).GetLength();
+	end=rest.Find(_T("\""),start);
+	if(end<0)
+		return false;
+	CString name=rest.Mid(start, end-start);
+
+	m_Account.password=password;
+	m_Account.displayName=name;
+	return true;
+}

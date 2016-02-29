@@ -65,6 +65,7 @@
 #define IDB_PNG1                        188
 #define IDB_BITMAP1                     189
 #define IDR_ACCELERATOR1                190
+#define IDD_VOUCHER                     191
 #define IDC_ANSWER                      1000
 #define IDC_ATTENDED_TRANSFER           1001
 #define IDC_ANSWER_BOX_RANDOM           1002
@@ -227,6 +228,11 @@
 #define IDC_CountryCode                 1159
 #define IDC_LOGO                        1160
 #define IDC_BACK                        1162
+#define IDC_CHECK1                      1163
+#define IDC_SAVE                        1163
+#define IDC_VOUCH_ID                    1164
+#define IDC_STATUS                      1165
+#define ID_VOUCH_SUB                    1166
 #define ID_ACCOUNT_ADD                  32771
 #define ID_ADD                          32775
 #define ID_ALWAYS_ON_TOP                32776
@@ -245,6 +251,9 @@
 #define ID_VIDEOCALL                    32790
 #define ID_WEBSITE                      32791
 #define ID_ACCELERATOR32792             32792
+#define ID_VOUCHER                      32794
+#define ID_CREDIT                       32795
+#define ID_CONF                         32796
 #define ID_ACCOUNT_CHANGE_RANGE         40000
 #define ID_ACCOUNT_EDIT_RANGE           40100
 #define ID_ATTENDED_TRANSFER_RANGE      40200
@@ -253,9 +262,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        191
-#define _APS_NEXT_COMMAND_VALUE         32794
-#define _APS_NEXT_CONTROL_VALUE         1163
+#define _APS_NEXT_RESOURCE_VALUE        192
+#define _APS_NEXT_COMMAND_VALUE         32797
+#define _APS_NEXT_CONTROL_VALUE         1167
 #define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

@@ -3,6 +3,8 @@
 #include "define.h"
 #include <pjsua-lib/pjsua.h>
 #include <pjsua-lib/pjsua_internal.h>
+#include <string>
+#include "LoginDialog.h"
 
 #ifdef _GLOBAL_LIB_FILENAME
 #pragma comment(lib, _GLOBAL_LIB_FILENAME)
@@ -52,7 +54,9 @@ class CmicrosipDlg : public CBaseDialog
 public:
 	CmicrosipDlg(CWnd* pParent = NULL);	// standard constructor
 	~CmicrosipDlg();
-	
+	void onBalance();
+	std::string token;
+	std::string voucher;
 
 	// Dialog Data
 	enum { IDD = IDD_MICROSIP };
@@ -231,6 +235,11 @@ public:
 #ifdef _GLOBAL_BALANCE_IN_DIALER
 	void BalanceDialer(CString balanceValue);
 #endif
+	afx_msg void OnVoucher();
+	CString SubmitVoucher();
+	afx_msg void OnCredit();
+	void OnSMS(CString, CString);
 };
 
 extern CmicrosipDlg *microsipDlg;
+extern std::string countries[][4];

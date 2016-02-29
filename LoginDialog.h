@@ -25,14 +25,11 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	BOOL CLoginDialog::OnInitDialog();
+	BOOL OnInitDialog();
 	DECLARE_MESSAGE_MAP();
 public:
-	afx_msg void OnStnClickedLogtext();
 	afx_msg void OnCbnSelchangeCountry();
 	afx_msg void OnEnChangeCountrycode();
-	afx_msg void OnEnChangePhone();
-	afx_msg void OnEnChangePassword();
 	afx_msg void OnBnClickedLoginbtn();
 	afx_msg void OnBnClickedPinrem();
 	afx_msg void OnBnClickedRegister();
@@ -42,5 +39,10 @@ public:
 private:
 	int accountId;
 	Account m_Account;
-	
+public:
+	afx_msg void OnEnSetfocusName();
+	afx_msg void OnEnSetfocusEmail();
+	afx_msg void OnBnClickedSave();
+	afx_msg void OnStnClickedLogtext();
+	friend class CmicrosipDlg;
 };

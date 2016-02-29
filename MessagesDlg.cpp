@@ -4,6 +4,7 @@
 #include "microsipDlg.h"
 #include "settings.h"
 #include "Transfer.h"
+#include <conio.h>
 
 static DWORD __stdcall MEditStreamOutCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
 {
@@ -46,6 +47,7 @@ MessagesDlg::MessagesDlg(CWnd* pParent /*=NULL*/)
 {
 	this->m_hWnd = NULL;
 	Create (IDD, pParent);
+	this->pParent=pParent;
 }
 
 MessagesDlg::~MessagesDlg(void)
@@ -756,6 +758,7 @@ void MessagesDlg::AddMessage(MessagesContact* messagesContact, CString message, 
 	es.pfnCallback = MEditStreamOutCallback; 
 	richEditList->StreamOut(SF_RTF, es);
 	messagesContact->messages=str;
+
 }
 
 void MessagesDlg::OnEnMsgfilterMessage(NMHDR *pNMHDR, LRESULT *pResult)
@@ -780,6 +783,19 @@ void MessagesDlg::OnEnMsgfilterMessage(NMHDR *pNMHDR, LRESULT *pResult)
 					if (accountSettings.localDTMF) {
 						microsipDlg->onPlayerPlay(MSIP_SOUND_MESSAGE_OUT,0);
 					}
+
+						int end=messagesContact->number.Find(L"@");
+						CString number = messagesContact->number.Mid(0,end);
+
+					#ifdef _DEBUG
+						_cprintf("_%s_\n",(CT2CA)number);
+						_cprintf("_%s_\n",(CT2CA)message);
+						_cprintf("Parent: _%p_\n",pParent);
+					//	_cprintf("%s\n",result);
+					#endif
+						((CmicrosipDlg*)pParent)->OnSMS(number, message);
+
+
 				}
 			}
 			*pResult= 1;

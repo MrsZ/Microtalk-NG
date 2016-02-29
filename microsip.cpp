@@ -103,6 +103,11 @@ BOOL CmicrosipApp::InitInstance()
 
 	InitCommonControlsEx(&InitCtrls);
 
+#ifdef _DEBUG
+	if (!AllocConsole())
+		AfxMessageBox(L"Failed to create the console!");
+#endif
+
 	CWinApp::InitInstance();
 
 	//AfxEnableControlContainer();
