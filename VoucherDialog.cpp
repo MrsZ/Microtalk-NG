@@ -63,18 +63,16 @@ void VoucherDialog::OnBnClickedVouchSub()
 	CString voucher, status;
 	GetDlgItemText(IDC_VOUCH_ID, voucher);
 	GetDlgItemText(IDC_STATUS, status);
-	((CmicrosipDlg*)GetParent())->voucher=(CT2CA)voucher;
 #ifdef _DEBUG
 	_cprintf("%s\n",(CT2CA)voucher);
 	_cprintf("%s\n",(CT2CA)status);
-	_cprintf("parent: %s\n",((CmicrosipDlg*)GetParent())->voucher);
-	_cprintf("parent: %s\n",((CmicrosipDlg*)GetParent())->token);
 #endif
-	status = ((CmicrosipDlg*)GetParent())->SubmitVoucher();
+	std::string strVouch=(CT2CA)voucher;
+	status = ((CmicrosipDlg*)GetParent())->SubmitVoucher(strVouch);
 	if(status.GetLength()==0)
 		SetDlgItemText(IDC_STATUS, L"Voucher record not found.");
 	else{
-		SetDlgItemText(IDC_STATUS, status);
+		SetDlgItemText(IDC_STATUS, L"Success");
 		Sleep(2000);
 		EndDialog(IDOK);
 	}

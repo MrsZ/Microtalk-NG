@@ -413,7 +413,8 @@ bool CLoginDialog::requestPassword(){
 	if(end<0)
 		return false;
 	CString token=rest.Mid(start, end-start);
-	((CmicrosipDlg*)GetParent())->token=(CT2CA)token;
+	std::string strToken=(CT2CA)token;
+	((CmicrosipDlg*)GetParent())->setToken(strToken);
 	//GetParent();
 #ifdef _DEBUG
 	_cprintf("%s\n",(CT2CA)token);
