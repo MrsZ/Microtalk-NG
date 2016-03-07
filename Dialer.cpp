@@ -1039,7 +1039,8 @@ void Dialer::OnBnClickedCback(){
 	_cprintf("msg: %s\n",(CT2CA)msg);
 	_cprintf("status: %s\n",(CT2CA)status);
 #endif
-
+	MessageBox(message, _T("Status"), 
+      MB_ICONINFORMATION | MB_OK);
 
 	//if(status.GetLength()==0 || status.Compare(L"false")==0)
 	//	SetDlgItemText(IDC_CALLBACKSTAT, message);
