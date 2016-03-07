@@ -5,6 +5,13 @@
 #include "microsipDlg.h"
 #include "microsip.h"
 #include "Strsafe.h"
+#include <afxinet.h>
+#include <sstream>
+#include <iomanip>
+#ifdef _DEBUG
+#include <conio.h>
+#endif
+#include "addons\cJSON\cJSON.h"
 
 Dialer::Dialer(CWnd* pParent /*=NULL*/)
 : CBaseDialog(Dialer::IDD, pParent)
@@ -223,6 +230,7 @@ BEGIN_MESSAGE_MAP(Dialer, CBaseDialog)
 #ifdef _GLOBAL_LOGO_DIALER
 	ON_WM_PAINT()
 #endif
+	ON_BN_CLICKED(IDC_CBACK, &Dialer::OnBnClickedCback)
 END_MESSAGE_MAP()
 
 BOOL Dialer::PreTranslateMessage(MSG* pMsg)
@@ -667,6 +675,7 @@ void Dialer::Clear(bool update)
 	combobox->SetCurSel(-1);
 	if (update) {
 		UpdateCallButton();
+		UpdateCallbackButton();
 	}
 }
 
@@ -785,16 +794,19 @@ void Dialer::SetNumber(CString  number, int callsCount)
 		combobox->SetWindowText(number);
 	}
 	UpdateCallButton(0, callsCount);
+	UpdateCallbackButton();
 }
 
 void Dialer::OnCbnEditchangeComboAddr()
 {
 	UpdateCallButton();
+	UpdateCallbackButton();
 }
 
 void Dialer::OnCbnSelchangeComboAddr()
 {	
 	UpdateCallButton(TRUE);
+	UpdateCallbackButton();
 }
 
 #ifdef _GLOBAL_LOGO_DIALER
@@ -966,3 +978,74 @@ void Dialer::OnBnClickedCallSkype()
 	CallToSkype();
 }
 #endif
+
+void Dialer::UpdateCallbackButton(){
+	CButton *button = (CButton *)GetDlgItem(IDC_CBACK);
+	CString currentNum;
+	GetDlgItemText(IDC_NUMBER,currentNum);
+	bool state=currentNum.IsEmpty();
+	if(state)
+		button->EnableWindow(false);
+	else
+		button->EnableWindow(true);
+}
+void Dialer::OnBnClickedCback(){
+	
+	CString fromNum, toNum;
+	fromNum=accountSettings.account.username;
+	GetDlgItemText(IDC_NUMBER, toNum);
+#ifdef _DEBUG
+	_cprintf("%s\n",(CT2CA)fromNum);
+	_cprintf("%s\n",(CT2CA)toNum);
+#endif
+	
+	std::string header = "/oneworld/callback_create?api_token=";
+	header+=((CmicrosipDlg*)GetParent())->getToken();
+	header+="&number=";
+	header+=(CT2CA)fromNum;
+	header+="&destination=";
+	header+=(CT2CA)toNum;
+	CInternetSession session;
+	CHttpConnection *pConnection = session.GetHttpConnection(_T("89.163.142.253"));
+	char result[500];
+	CString request(header.c_str());
+	CHttpFile *pFile = pConnection->OpenRequest(1,request);
+	if(!pFile->SendRequest())
+		return;
+	pFile->Read((void*)result,500);
+#ifdef _DEBUG
+	_cprintf("%s\n",result);
+#endif
+
+	CString msg(result);
+	int start=msg.Find(_T("msg\":\""));
+	if(start<0)
+		return;
+	start+=((CString)_T("msg\":\"")).GetLength();
+	int end=msg.Find(_T("\""),start);
+	if(end<0)
+		return;
+	CString message=msg.Mid(start, end-start);
+	CString status;
+	start=msg.Find(_T("success\":"));
+	if(start<0)
+		return;
+	start+=((CString)_T("success\":")).GetLength();
+	end=msg.Find(_T(","),start);
+	if(end<0)
+		return;
+	status=msg.Mid(start, end-start);
+#ifdef _DEBUG
+	_cprintf("msg: %s\n",(CT2CA)msg);
+	_cprintf("status: %s\n",(CT2CA)status);
+#endif
+
+
+	//if(status.GetLength()==0 || status.Compare(L"false")==0)
+	//	SetDlgItemText(IDC_CALLBACKSTAT, message);
+	//else{
+	//	SetDlgItemText(IDC_CALLBACKSTAT, L"Success");
+	//	Sleep(2000);
+	//	EndDialog(IDOK);
+	//}
+}

@@ -68,6 +68,7 @@
 #define IDD_VOUCHER                     191
 #define IDD_CONF                        192
 #define IDR_CONFMENU                    193
+#define IDD_CHARGES                     195
 #define IDC_ANSWER                      1000
 #define IDC_ATTENDED_TRANSFER           1001
 #define IDC_ANSWER_BOX_RANDOM           1002
@@ -222,6 +223,8 @@
 #define IDC_LOGTEXT                     1153
 #define IDC_BUTTON1                     1155
 #define IDC_LoginBTN                    1155
+#define IDC_SUBMIT                      1155
+#define IDC_CBACK                       1155
 #define IDC_BUTTON2                     1156
 #define IDC_PinRem                      1156
 #define IDC_CONFSUBMIT                  1156
@@ -238,6 +241,8 @@
 #define ID_VOUCH_SUB                    1166
 #define IDC_CONFPIN                     1170
 #define IDC_CONFLIST                    1171
+#define IDC_CHARGELIST                  1178
+#define IDC_HRS                         1180
 #define ID_ACCOUNT_ADD                  32771
 #define ID_ADD                          32775
 #define ID_ALWAYS_ON_TOP                32776
@@ -266,6 +271,10 @@
 #define ID_JOIN                         32801
 #define ID__DELCONF                     32802
 #define ID__COPY                        32803
+#define ID_Menu                         32804
+#define ID_CBACK                        32805
+#define ID__CHARGES32806                32806
+#define ID__CHARGESMENU                 32807
 #define ID_ACCOUNT_CHANGE_RANGE         40000
 #define ID_ACCOUNT_EDIT_RANGE           40100
 #define ID_ATTENDED_TRANSFER_RANGE      40200
@@ -274,9 +283,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        194
-#define _APS_NEXT_COMMAND_VALUE         32804
-#define _APS_NEXT_CONTROL_VALUE         1172
+#define _APS_NEXT_RESOURCE_VALUE        196
+#define _APS_NEXT_COMMAND_VALUE         32808
+#define _APS_NEXT_CONTROL_VALUE         1181
 #define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

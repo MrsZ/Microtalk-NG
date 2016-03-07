@@ -244,6 +244,7 @@ private:
 	std::string token;
 public:
 	afx_msg void OnConf();
+	afx_msg void OnCharges();
 };
 
 extern CmicrosipDlg *microsipDlg;

@@ -107,6 +107,7 @@ void CLoginDialog::OnBnClickedLoginbtn()
 		m_Account.username=(CString)userPhone.c_str();
 		GetDlgItemText(IDC_PASSWORD,m_Account.password);
 		accountSettings.accountId = accountId;
+		
 		//m_Account.rememberPassword=1;
 		accountSettings.AccountSave(accountId, &m_Account);
 		//accountSettings.SettingsSave();
@@ -129,12 +130,12 @@ void CLoginDialog::OnBnClickedLoginbtn()
 		GetDlgItem(IDC_CountryCode)->ShowWindow(SW_NORMAL);
 		GetDlgItem(IDC_PASSWORD)->ShowWindow(SW_NORMAL);
 		GetDlgItem(IDC_Register)->ShowWindow(SW_HIDE);
+		((CButton*) GetDlgItem(IDC_SAVE))->SetCheck(BST_CHECKED);
 	}
 	
 }
 
-void CLoginDialog::OnBnClickedPinrem()
-{
+void CLoginDialog::OnBnClickedPinrem(){
 	GetDlgItem(IDC_SAVE)->ShowWindow(SW_HIDE);
 	caption="Pin Reminder";
 	SetWindowText(caption);

@@ -105,9 +105,9 @@ IDR_CONFMENU MENU
 BEGIN
     POPUP ""
     BEGIN
-        MENUITEM "Copy",                        ID__COPY
+        MENUITEM "Copy",                        ID_COPY
         MENUITEM "Join",                        ID_JOIN
-        MENUITEM "Delete",                      ID__DELETE
+        MENUITEM "Delete",                      ID_DELETE
     END
 END
 
@@ -216,7 +216,7 @@ BEGIN
     CONTROL         "",IDC_CONTACTS,"SysListView32",LVS_LIST | LVS_SORTASCENDING | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,0,0,177,159
 END
 
-IDD_DIALER DIALOGEX 0, 0, 178, 184
+IDD_DIALER DIALOGEX 0, 0, 178, 187
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
@@ -251,6 +251,7 @@ BEGIN
     CTEXT           "-",-1,155,120,16,8
     CONTROL         "Mute speaker",IDC_BUTTON_MUTE_OUTPUT,"Button",BS_AUTOCHECKBOX | BS_ICON | BS_PUSHLIKE | BS_FLAT | WS_TABSTOP,155,134,16,16
     LTEXT           "",IDC_BALANCE,24,3,127,19,SS_SUNKEN | WS_BORDER,WS_EX_STATICEDGE
+    PUSHBUTTON      "Callback",IDC_CBACK,63,173,50,14,WS_DISABLED
 END
 
 IDD_MESSAGES DIALOGEX 0, 0, 224, 90
@@ -373,6 +374,17 @@ BEGIN
     CONTROL         "",IDC_CONFLIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,97,174,119,WS_EX_CLIENTEDGE
 END
 
+IDD_CHARGES DIALOGEX 0, 0, 281, 213
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Charges"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_CHARGELIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,22,267,184
+    LTEXT           "Period (hours)",IDC_STATIC,7,8,66,14
+    EDITTEXT        IDC_HRS,88,7,52,14,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Submit",IDC_SUBMIT,215,7,59,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -393,11 +405,6 @@ BEGIN
         RIGHTMARGIN, 179
     END
 
-    IDD_DIALER, DIALOG
-    BEGIN
-        BOTTOMMARGIN, 183
-    END
-
     IDD_VOUCHER, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -411,6 +418,14 @@ BEGIN
         RIGHTMARGIN, 182
         TOPMARGIN, 7
         BOTTOMMARGIN, 216
+    END
+
+    IDD_CHARGES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 274
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 206
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -437,8 +452,9 @@ IDR_MENU_TRAY MENU
 BEGIN
     POPUP ""
     BEGIN
-        MENUITEM "Redeem Voucher",              ID_VOUCHER
+        MENUITEM "Charges",                     ID__CHARGESMENU
         MENUITEM "Add Credit",                  ID_CREDIT
+        MENUITEM "Redeem Voucher",              ID_VOUCHER
         MENUITEM "Conference call",             ID_CONF
         MENUITEM SEPARATOR
         MENUITEM "Exit\tCtrl+X",                ID_EXIT
@@ -480,7 +496,7 @@ BEGIN
     EDITTEXT        IDC_EMAIL,20,112,163,15,ES_AUTOHSCROLL
     EDITTEXT        IDC_NAME,20,89,163,15,ES_AUTOHSCROLL
     PUSHBUTTON      "Back",IDC_BACK,7,7,50,14,NOT WS_VISIBLE
-    CONTROL         "Save password",IDC_SAVE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_MULTILINE | NOT WS_VISIBLE | WS_TABSTOP,10,88,46,17
+    CONTROL         "Save user on this computer",IDC_SAVE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_MULTILINE | NOT WS_VISIBLE | WS_TABSTOP,10,88,46,21
 END
 
 

@@ -5,7 +5,9 @@
 #include "microsip.h"
 #include "VoucherDialog.h"
 #include "microsipDlg.h"
+#ifdef _DEBUG
 #include <conio.h>
+#endif
 
 
 // VoucherDialog dialog

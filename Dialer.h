@@ -62,6 +62,7 @@ public:
 	void DialedSave(CComboBox *combobox);
 	void SetNumber(CString  number, int callsCount = -1);
 	void UpdateCallButton(BOOL forse = FALSE, int callsCount = -1);
+	void UpdateCallbackButton();
 	void Action(DialerActions action);
 	void Clear(bool update=true);
 
@@ -122,4 +123,5 @@ public:
 #endif
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
+	afx_msg void OnBnClickedCback();
 };

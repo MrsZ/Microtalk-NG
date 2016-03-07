@@ -46,14 +46,7 @@ END_MESSAGE_MAP()
 
 
 BOOL Conference::OnInitDialog(){
-	CDialog::OnInitDialog();
-
-	//AutoMove(IDC_CALLS,0,0,100,100);
-
-	//TranslateDialog(this->m_hWnd);
-
-	//nextKey = 0;
-	
+	CDialog::OnInitDialog();	
 	CListCtrl *list= (CListCtrl*)GetDlgItem(IDC_CONFLIST);
 
 

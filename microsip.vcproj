@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="microsip"
+	Name="Microtalk-NG"
 	ProjectGUID="{BB46A3FD-3E25-44BF-9DED-36A8E838A095}"
 	RootNamespace="microsip"
 	Keyword="MFCProj"
@@ -207,7 +207,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Charges.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\addons\cJSON\cJSON.c"
+				>
+			</File>
+			<File
 				RelativePath=".\ClosableTabCtrl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Conference.cpp"
 				>
 			</File>
 			<File
@@ -302,6 +314,10 @@
 				RelativePath=".\VisualStylesXP.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\VoucherDialog.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -333,7 +349,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Charges.h"
+				>
+			</File>
+			<File
+				RelativePath=".\addons\cJSON\cJSON.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ClosableTabCtrl.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Conference.h"
 				>
 			</File>
 			<File
@@ -430,6 +458,10 @@
 			</File>
 			<File
 				RelativePath=".\VisualStylesXP.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VoucherDialog.h"
 				>
 			</File>
 		</Filter>
