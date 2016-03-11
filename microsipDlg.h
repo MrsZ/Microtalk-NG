@@ -55,8 +55,7 @@ public:
 	CmicrosipDlg(CWnd* pParent = NULL);	// standard constructor
 	~CmicrosipDlg();
 	void onBalance();
-	std::string token;
-	std::string voucher;
+
 
 	// Dialog Data
 	enum { IDD = IDD_MICROSIP };
@@ -235,10 +234,19 @@ public:
 #ifdef _GLOBAL_BALANCE_IN_DIALER
 	void BalanceDialer(CString balanceValue);
 #endif
+	void setToken(std::string);
+	void setPin(std::string);
+	std::string getToken();
 	afx_msg void OnVoucher();
-	CString SubmitVoucher();
+	CString SubmitVoucher(std::string);
 	afx_msg void OnCredit();
 	void OnSMS(CString, CString);
+private:
+	std::string token;
+	std::string pin;
+public:
+	afx_msg void OnConf();
+	afx_msg void OnCharges();
 };
 
 extern CmicrosipDlg *microsipDlg;

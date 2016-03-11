@@ -52,7 +52,7 @@ BOOL CmicrosipApp::InitInstance()
 {
 	 bool AlreadyRunning;
 	 HANDLE hMutexOneInstance = ::CreateMutex( NULL, TRUE,
-        _T("MICROSIP-088FA840-B10D-11D3-BC36-006067709674"));
+        _T("MICROTALKNG-088FA840-B10D-11D3-BC36-006067709674"));
     AlreadyRunning = (GetLastError() == ERROR_ALREADY_EXISTS);
     if (hMutexOneInstance != NULL) {
         ::ReleaseMutex(hMutexOneInstance);
@@ -120,8 +120,11 @@ BOOL CmicrosipApp::InitInstance()
 	hGlobal = m_pMainWnd->m_hWnd;
 
 	CLoginDialog* dlg = new CLoginDialog(microsipDlg);
-	if(dlg->DoModal()>1)
-		m_pMainWnd->DestroyWindow();
+	if(dlg->DoModal()>1){
+	m_pMainWnd->DestroyWindow();
+	return false;
+	}
+		
 
 	//microsipDlg->AccountSettingsPendingSave();
 	//microsipDlg->PJAccountAdd();

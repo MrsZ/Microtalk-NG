@@ -1,21 +1,4 @@
-//
-// resources Microsoft Visual C++ does not edit directly
-//
-
-#ifdef APSTUDIO_INVOKED
-#error this file is not editable by Microsoft Visual C++
-#endif //APSTUDIO_INVOKED
-
-
 #include "define.h"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
 IDR_MAINFRAME           ICON                    _GLOBAL_ICON
 IDI_EXIT                ICON                    "res\\exit.ico"
 IDI_DEFAULT             ICON                    "res\\default.ico"
@@ -100,7 +83,7 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
 			VALUE "CompanyName", _GLOBAL_COMPANY
-            VALUE "FileDescription", _GLOBAL_NAME " - a lightweight softphone"
+            VALUE "FileDescription", _GLOBAL_NAME ". Talk For Less."
             VALUE "FileVersion", _GLOBAL_VERSION
             VALUE "LegalCopyright", _GLOBAL_COMPANY
 			VALUE "ProductDescription", _GLOBAL_NAME
