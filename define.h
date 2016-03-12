@@ -5,7 +5,7 @@
 #endif
 
 #ifndef _GLOBAL_CUSTOM
-#define _GLOBAL_HELP_WEBSITE "http://microtalkng.com/about-us.html"
+#define _GLOBAL_HELP_WEBSITE "http://microtalkng.com/about-us"
 #endif
 
 #ifndef _GLOBAL_NAME_NICE

@@ -54,7 +54,6 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
-    "#include ""res\\microsip.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#include ""afxres.rc""     // Standard components\r\n"
     "#endif\r\n"
     "\0"
@@ -119,7 +118,79 @@ END
 
 IDR_ACCELERATOR1 ACCELERATORS 
 BEGIN
-    "8",            ID_ACCELERATOR32792,    VIRTKEY, NOINVERT
+    VK_RETURN,      ID_ACCELERATOR32792,    VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\microsip.ico"
+IDI_EXIT                ICON                    "res\\exit.ico"
+IDI_DEFAULT             ICON                    "res\\default.ico"
+IDI_UNKNOWN             ICON                    "res\\unknown.ico"
+IDI_OFFLINE             ICON                    "res\\offline.ico"
+IDI_BUSY                ICON                    "res\\busy.ico"
+IDI_AWAY                ICON                    "res\\away.ico"
+IDI_ONLINE              ICON                    "res\\online.ico"
+IDI_ACTIVE              ICON                    "res\\active.ico"
+IDI_BLANK               ICON                    "res\\blank.ico"
+IDI_CALL_OUT            ICON                    "res\\callout.ico"
+IDI_CALL_IN             ICON                    "res\\callin.ico"
+IDI_CALL_MISS           ICON                    "res\\callmiss.ico"
+IDI_MUTE_OUTPUT         ICON                    "res\\muteout.ico"
+IDI_MUTED_OUTPUT        ICON                    "res\\mutedout.ico"
+IDI_MUTE_INPUT          ICON                    "res\\mutein.ico"
+IDI_MUTED_INPUT         ICON                    "res\\mutedin.ico"
+IDI_HOLD                ICON                    "res\\hold.ico"
+IDI_TRANSFER            ICON                    "res\\transfer.ico"
+IDI_ATTENDED_TRANSFER   ICON                    "res\\attended.ico"
+IDI_VIDEO               ICON                    "res\\video.ico"
+IDI_MESSAGE             ICON                    "res\\message.ico"
+IDI_CLOSE               ICON                    "res\\close.ico"
+IDI_CLOSE_2             ICON                    "res\\close2.ico"
+IDI_INACTIVE            ICON                    "res\\inactive.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,1,0
+ PRODUCTVERSION 1,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "www.microtalkng.com"
+            VALUE "FileDescription", "Microtalk-NG. Talk For Less."
+            VALUE "FileVersion", "1.0.1"
+            VALUE "LegalCopyright", "www.microtalkng.com"
+            VALUE "ProductDescription", "Microtalk-NG"
+            VALUE "ProductName", "Microtalk-NG"
+            VALUE "ProductVersion", "1.0.1"
+            VALUE "OriginalFilename", "Microtalk-NG.exe"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
 END
 
 
@@ -221,9 +292,9 @@ STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     COMBOBOX        IDC_NUMBER,9,24,162,30,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL
-    PUSHBUTTON      "Call",IDC_CALL,25,153,99,18,WS_DISABLED
-    PUSHBUTTON      "Video call",IDC_VIDEO_CALL,20,153,23,18,BS_ICON | WS_DISABLED
-    PUSHBUTTON      "Message",IDC_MESSAGE,127,153,23,18,BS_ICON | WS_DISABLED
+    PUSHBUTTON      "Call",IDC_CALL,47,154,82,18,WS_DISABLED
+    PUSHBUTTON      "Video call",IDC_VIDEO_CALL,20,154,23,18,BS_ICON | WS_DISABLED
+    PUSHBUTTON      "Message",IDC_MESSAGE,131,154,23,18,BS_ICON | WS_DISABLED
     PUSHBUTTON      "End call",IDC_END,47,153,82,18,NOT WS_VISIBLE
     PUSHBUTTON      "Transfer",IDC_TRANSFER,20,153,23,18,BS_ICON | NOT WS_VISIBLE | WS_DISABLED
     CHECKBOX        "Hold",IDC_HOLD,132,153,23,18,BS_ICON | BS_PUSHLIKE | NOT WS_VISIBLE | WS_DISABLED
@@ -380,9 +451,33 @@ CAPTION "Charges"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_CHARGELIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,22,267,184
+<<<<<<< HEAD
     LTEXT           "Period (hours)",IDC_STATIC,7,8,66,14
     EDITTEXT        IDC_HRS,88,7,52,14,ES_AUTOHSCROLL | ES_NUMBER
     PUSHBUTTON      "Submit",IDC_SUBMIT,215,7,59,14
+=======
+    COMBOBOX        IDC_HRS,89,7,84,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_LOGIN DIALOGEX 0, 0, 203, 185
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CTEXT           "Log In",IDC_LOGTEXT,7,15,189,30
+    COMBOBOX        IDC_COUNTRY,21,43,162,12,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PHONE,66,66,117,15,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_PASSWORD,65,89,118,15,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Log In",IDC_LoginBTN,19,113,163,17
+    PUSHBUTTON      "Pin Reminder",IDC_PinRem,20,133,163,17
+    PUSHBUTTON      "Register",IDC_Register,20,153,163,17
+    EDITTEXT        IDC_CountryCode,20,66,45,15,ES_RIGHT | ES_READONLY | WS_DISABLED
+    CONTROL         202,IDC_LOGO,"Static",SS_BITMAP | SS_REALSIZEIMAGE,63,10,77,71
+    EDITTEXT        IDC_EMAIL,20,112,163,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NAME,20,89,163,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "Back",IDC_BACK,7,0,50,14,NOT WS_VISIBLE | NOT WS_TABSTOP
+    CONTROL         "Save user on this PC",IDC_SAVE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_MULTILINE | NOT WS_VISIBLE | WS_TABSTOP,7,88,43,21
+>>>>>>> master
 END
 
 
@@ -427,9 +522,44 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 206
     END
+<<<<<<< HEAD
+=======
+
+    IDD_LOGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 196
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 178
+    END
+>>>>>>> master
 END
 #endif    // APSTUDIO_INVOKED
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_CHARGES DLGINIT
+BEGIN
+    IDC_HRS, 0x403, 6, 0
+0x2031, 0x6164, 0x0079, 
+    IDC_HRS, 0x403, 7, 0
+0x2031, 0x6577, 0x6b65, "\000" 
+    IDC_HRS, 0x403, 8, 0
+0x2031, 0x6f6d, 0x746e, 0x0068, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LOGO                BITMAP                  "res\\logo2.bmp"
 #endif    // Russian resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -476,6 +606,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 /////////////////////////////////////////////////////////////////////////////
 //
+<<<<<<< HEAD
 // Dialog
 //
 
@@ -528,6 +659,8 @@ IDB_LOGO                BITMAP                  "bitmap1.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
+=======
+>>>>>>> master
 // String Table
 //
 
@@ -554,7 +687,6 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE 9, 1
 #pragma code_page(1252)
-#include "res\microsip.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"     // Standard components
 #endif
 

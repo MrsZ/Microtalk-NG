@@ -131,6 +131,10 @@ void CLoginDialog::OnBnClickedLoginbtn()
 		GetDlgItem(IDC_PASSWORD)->ShowWindow(SW_NORMAL);
 		GetDlgItem(IDC_Register)->ShowWindow(SW_HIDE);
 		((CButton*) GetDlgItem(IDC_SAVE))->SetCheck(BST_CHECKED);
+<<<<<<< HEAD
+=======
+		m_Account.rememberPassword=BST_CHECKED;
+>>>>>>> master
 	}
 	
 }
@@ -295,6 +299,16 @@ void CLoginDialog::Load(int id)
 		m_Account.ice=0;
 		m_Account.publish=0;
 		m_Account.allowRewrite=0;
+	}else{
+		((CmicrosipDlg*)GetParent())->PJDestroy();
+		accountSettings.Init();
+		m_Account.domain=m_Account.server="89.163.142.253";
+		m_Account.Country=accountSettings.account.Country;
+		m_Account.username=accountSettings.account.username;
+		m_Account.password=accountSettings.account.password;
+		m_Account.ice=0;
+		m_Account.publish=0;
+		m_Account.allowRewrite=0;
 	}
 	SetDlgItemText(IDC_PASSWORD,m_Account.password);
 
@@ -371,13 +385,28 @@ bool CLoginDialog::requestPassword(){
 	req+="&pincode=";
 	req+=(CT2CA)m_Account.password;
 
+#ifdef _DEBUG
+	_cprintf("Address: 89.163.142.253\n");
+	_cprintf("Request: %s\n",req.c_str());
+#endif
+
 	long len = req.length();
 	BOOL res = pFile->SendRequest(header,lstrlen(header), (LPVOID)req.c_str(),len);
-	if(!res)
-		return !res;
+
+	if(!res){
+#ifdef _DEBUG
+	_cprintf("Request failed!!!!\n");
+#endif
+		return res;
+	}
 	//pFile
 	char result[500];
 	pFile->Read(result,500);
+#ifdef _DEBUG
+	_cprintf("***********************************\n");
+	_cprintf("%s\n",result);
+	_cprintf("***********************************\n");
+#endif
 	CString rest(result);
 	int start=rest.Find(_T("password\":\""));
 	if(start<0)
@@ -416,6 +445,11 @@ bool CLoginDialog::requestPassword(){
 	CString token=rest.Mid(start, end-start);
 	std::string strToken=(CT2CA)token;
 	((CmicrosipDlg*)GetParent())->setToken(strToken);
+<<<<<<< HEAD
+=======
+	std::string pin=(CT2CA)m_Account.password;
+	((CmicrosipDlg*)GetParent())->setPin(pin);
+>>>>>>> master
 	//GetParent();
 #ifdef _DEBUG
 	_cprintf("%s\n",(CT2CA)token);
@@ -473,21 +507,12 @@ bool CLoginDialog::registration(){
 	_cprintf("%s",(CT2CA)success);
 	_cprintf("%s",result);
 #endif
-
-	if(0==success.Compare(_T("false"))){
-		SetDlgItemText(IDC_LOGTEXT,L"Something went wrong");
-		start=rest.Find(_T("msg\":\""));
-		if(start<0)
-			return false;
-		start+=((CString)_T("msg\":\"")).GetLength();
-		int end=rest.Find(_T("\""),start);
-		if(end<0)
-			return false;
-		CString msg=rest.Mid(start, end-start);
-		SetDlgItemText(IDC_LOGTEXT,msg);
-		return false;
-	}
-		
+	start=rest.Find(_T("msg\":\""));
+	start+=((CString)_T("msg\":\"")).GetLength();
+	end=rest.Find(_T("\""),start);
+	CString msg=rest.Mid(start, end-start);
+	SetDlgItemText(IDC_LOGTEXT,msg);
+	Sleep(2000);
 
 	return true;
 }
