@@ -236,6 +236,10 @@ public:
 #endif
 	void setToken(std::string);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	void setPin(std::string);
+>>>>>>> master
 =======
 	void setPin(std::string);
 >>>>>>> master
@@ -247,6 +251,10 @@ public:
 private:
 	std::string token;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	std::string pin;
+>>>>>>> master
 =======
 	std::string pin;
 >>>>>>> master

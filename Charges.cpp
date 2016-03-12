@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Charges.cpp : implementation file
 //
 
@@ -125,6 +126,8 @@ void Charges::OnBnClickedSubmit(){
 	}
 }
 =======
+=======
+>>>>>>> master
 // Charges.cpp : implementation file
 //
 
@@ -272,4 +275,7 @@ void Charges::OnCbnSelchangeHrs()
 {
 	OnBnClickedSubmit();
 }
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master

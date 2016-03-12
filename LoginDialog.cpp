@@ -132,6 +132,10 @@ void CLoginDialog::OnBnClickedLoginbtn()
 		GetDlgItem(IDC_Register)->ShowWindow(SW_HIDE);
 		((CButton*) GetDlgItem(IDC_SAVE))->SetCheck(BST_CHECKED);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		m_Account.rememberPassword=BST_CHECKED;
+>>>>>>> master
 =======
 		m_Account.rememberPassword=BST_CHECKED;
 >>>>>>> master
@@ -446,6 +450,11 @@ bool CLoginDialog::requestPassword(){
 	std::string strToken=(CT2CA)token;
 	((CmicrosipDlg*)GetParent())->setToken(strToken);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	std::string pin=(CT2CA)m_Account.password;
+	((CmicrosipDlg*)GetParent())->setPin(pin);
+>>>>>>> master
 =======
 	std::string pin=(CT2CA)m_Account.password;
 	((CmicrosipDlg*)GetParent())->setPin(pin);

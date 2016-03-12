@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma once
 
 #include "resource.h"
@@ -25,6 +26,8 @@ public:
 	BOOL OnInitDialog();
 };
 =======
+=======
+>>>>>>> master
 #pragma once
 
 #include "resource.h"
@@ -51,4 +54,7 @@ public:
 	BOOL OnInitDialog();
 	afx_msg void OnCbnSelchangeHrs();
 };
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
