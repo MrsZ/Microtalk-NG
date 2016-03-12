@@ -451,14 +451,6 @@ CAPTION "Charges"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_CHARGELIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,22,267,184
-<<<<<<< HEAD
-<<<<<<< HEAD
-    LTEXT           "Period (hours)",IDC_STATIC,7,8,66,14
-    EDITTEXT        IDC_HRS,88,7,52,14,ES_AUTOHSCROLL | ES_NUMBER
-    PUSHBUTTON      "Submit",IDC_SUBMIT,215,7,59,14
-=======
-=======
->>>>>>> master
     COMBOBOX        IDC_HRS,89,7,84,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
 END
 
@@ -480,10 +472,6 @@ BEGIN
     EDITTEXT        IDC_NAME,20,89,163,15,ES_AUTOHSCROLL
     PUSHBUTTON      "Back",IDC_BACK,7,0,50,14,NOT WS_VISIBLE | NOT WS_TABSTOP
     CONTROL         "Save user on this PC",IDC_SAVE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_MULTILINE | NOT WS_VISIBLE | WS_TABSTOP,7,88,43,21
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
 END
 
 
@@ -528,11 +516,6 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 206
     END
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> master
 
     IDD_LOGIN, DIALOG
     BEGIN
@@ -541,10 +524,6 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 178
     END
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -618,64 +597,6 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 /////////////////////////////////////////////////////////////////////////////
 //
-<<<<<<< HEAD
-<<<<<<< HEAD
-// Dialog
-//
-
-IDD_LOGIN DIALOGEX 0, 0, 203, 185
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Dialog"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
-BEGIN
-    CTEXT           "Log In",IDC_LOGTEXT,58,7,138,30
-    COMBOBOX        IDC_COUNTRY,21,43,162,12,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_PHONE,66,66,117,15,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_PASSWORD,65,89,118,15,ES_PASSWORD | ES_AUTOHSCROLL
-    PUSHBUTTON      "Log In",IDC_LoginBTN,19,113,163,17
-    PUSHBUTTON      "Pin Reminder",IDC_PinRem,20,133,163,17
-    PUSHBUTTON      "Register",IDC_Register,20,153,163,17
-    EDITTEXT        IDC_CountryCode,20,66,45,15,ES_RIGHT | ES_READONLY | WS_DISABLED
-    CONTROL         182,IDC_LOGO,"Static",SS_BITMAP | SS_REALSIZEIMAGE,63,0,77,71
-    EDITTEXT        IDC_EMAIL,20,112,163,15,ES_AUTOHSCROLL
-    EDITTEXT        IDC_NAME,20,89,163,15,ES_AUTOHSCROLL
-    PUSHBUTTON      "Back",IDC_BACK,7,7,50,14,NOT WS_VISIBLE
-    CONTROL         "Save user on this computer",IDC_SAVE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_MULTILINE | NOT WS_VISIBLE | WS_TABSTOP,10,88,46,21
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
-BEGIN
-    IDD_LOGIN, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 196
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 178
-    END
-END
-#endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-IDB_LOGO                BITMAP                  "bitmap1.bmp"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-=======
->>>>>>> master
-=======
->>>>>>> master
 // String Table
 //
 

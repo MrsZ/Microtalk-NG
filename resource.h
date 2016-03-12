@@ -68,16 +68,8 @@
 #define IDD_CONF                        192
 #define IDR_CONFMENU                    193
 #define IDD_CHARGES                     195
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 #define IDB_BITMAP3                     202
 #define IDB_LOGO                        202
->>>>>>> master
-=======
-#define IDB_BITMAP3                     202
-#define IDB_LOGO                        202
->>>>>>> master
 #define IDC_ANSWER                      1000
 #define IDC_ATTENDED_TRANSFER           1001
 #define IDC_ANSWER_BOX_RANDOM           1002
@@ -292,21 +284,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-<<<<<<< HEAD
-<<<<<<< HEAD
-#define _APS_NEXT_RESOURCE_VALUE        196
-#define _APS_NEXT_COMMAND_VALUE         32808
-#define _APS_NEXT_CONTROL_VALUE         1181
-=======
 #define _APS_NEXT_RESOURCE_VALUE        203
 #define _APS_NEXT_COMMAND_VALUE         32808
 #define _APS_NEXT_CONTROL_VALUE         1182
->>>>>>> master
-=======
-#define _APS_NEXT_RESOURCE_VALUE        203
-#define _APS_NEXT_COMMAND_VALUE         32808
-#define _APS_NEXT_CONTROL_VALUE         1182
->>>>>>> master
 #define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

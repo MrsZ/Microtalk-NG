@@ -235,14 +235,7 @@ public:
 	void BalanceDialer(CString balanceValue);
 #endif
 	void setToken(std::string);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	void setPin(std::string);
->>>>>>> master
-=======
-	void setPin(std::string);
->>>>>>> master
 	std::string getToken();
 	afx_msg void OnVoucher();
 	CString SubmitVoucher(std::string);
@@ -250,14 +243,7 @@ public:
 	void OnSMS(CString, CString);
 private:
 	std::string token;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	std::string pin;
->>>>>>> master
-=======
-	std::string pin;
->>>>>>> master
 public:
 	afx_msg void OnConf();
 	afx_msg void OnCharges();
