@@ -3,6 +3,8 @@
 #include "define.h"
 #include <pjsua-lib/pjsua.h>
 #include <pjsua-lib/pjsua_internal.h>
+#include <string>
+#include "LoginDialog.h"
 
 #ifdef _GLOBAL_LIB_FILENAME
 #pragma comment(lib, _GLOBAL_LIB_FILENAME)
@@ -10,13 +12,13 @@
 
 #ifdef NDEBUG
 #ifdef _GLOBAL_VIDEO
-#pragma comment(lib, "libpjproject-i386-Win32-vc8-Release-Static-Video.lib")
+#pragma comment(lib, "libpjproject-i386-Win32-vc8-Release.lib")
 #else
 #pragma comment(lib, "libpjproject-i386-Win32-vc8-Release-Static-NoVideo.lib")
 #endif
 #else
 #ifdef _GLOBAL_VIDEO
-#pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug-Static-Video.lib")
+#pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug.lib")
 #else
 #pragma comment(lib, "libpjproject-i386-Win32-vc8-Debug-Static-NoVideo.lib")
 #endif
@@ -52,12 +54,13 @@ class CmicrosipDlg : public CBaseDialog
 public:
 	CmicrosipDlg(CWnd* pParent = NULL);	// standard constructor
 	~CmicrosipDlg();
+	void onBalance();
+
 
 	// Dialog Data
 	enum { IDD = IDD_MICROSIP };
 
 	bool m_startMinimized;
-
 #ifndef _GLOBAL_NO_SETTINGS
 	SettingsDlg* settingsDlg;
 #endif
@@ -231,6 +234,20 @@ public:
 #ifdef _GLOBAL_BALANCE_IN_DIALER
 	void BalanceDialer(CString balanceValue);
 #endif
+	void setToken(std::string);
+	void setPin(std::string);
+	std::string getToken();
+	afx_msg void OnVoucher();
+	CString SubmitVoucher(std::string);
+	afx_msg void OnCredit();
+	void OnSMS(CString, CString);
+private:
+	std::string token;
+	std::string pin;
+public:
+	afx_msg void OnConf();
+	afx_msg void OnCharges();
 };
 
 extern CmicrosipDlg *microsipDlg;
+extern std::string countries[][4];

@@ -5,7 +5,7 @@
 #endif
 
 #ifndef _GLOBAL_CUSTOM
-#define _GLOBAL_HELP_WEBSITE "http://www.microsip.org/help"
+#define _GLOBAL_HELP_WEBSITE "http://microtalkng.com/about-us"
 #endif
 
 #ifndef _GLOBAL_NAME_NICE
@@ -59,5 +59,5 @@
 #endif
 
 #if !defined _GLOBAL_TAB_HELP && !defined _GLOBAL_CUSTOM
-#define _GLOBAL_TAB_HELP "http://www.microsip.org/help"
+#define _GLOBAL_TAB_HELP "http://www.microtalkng.com/about-us"
 #endif

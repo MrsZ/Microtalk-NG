@@ -43,7 +43,7 @@ private:
 	void UpdateCallButton(BOOL active = FALSE, pjsua_call_info *call_info = NULL);
 	void CallStart(bool hasVideo = false);
 	BOOL CloseTab(int i, BOOL safe = FALSE);
-
+	CWnd* pParent;
 	CMenu menuAttendedTransfer;
 
 protected:

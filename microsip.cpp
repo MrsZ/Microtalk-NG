@@ -5,7 +5,9 @@
 #include "stdafx.h"
 #include "microsip.h"
 #include "microsipDlg.h"
+
 #include "LoginDialog.h"
+
 #include "const.h"
 #include "settings.h"
 
@@ -50,7 +52,7 @@ BOOL CmicrosipApp::InitInstance()
 {
 	 bool AlreadyRunning;
 	 HANDLE hMutexOneInstance = ::CreateMutex( NULL, TRUE,
-        _T("MICROSIP-088FA840-B10D-11D3-BC36-006067709674"));
+        _T("MICROTALKNG-088FA840-B10D-11D3-BC36-006067709674"));
     AlreadyRunning = (GetLastError() == ERROR_ALREADY_EXISTS);
     if (hMutexOneInstance != NULL) {
         ::ReleaseMutex(hMutexOneInstance);
@@ -101,6 +103,11 @@ BOOL CmicrosipApp::InitInstance()
 
 	InitCommonControlsEx(&InitCtrls);
 
+#ifdef _DEBUG
+	if (!AllocConsole())
+		AfxMessageBox(L"Failed to create the console!");
+#endif
+
 	CWinApp::InitInstance();
 
 	//AfxEnableControlContainer();
@@ -108,10 +115,20 @@ BOOL CmicrosipApp::InitInstance()
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
 	AfxInitRichEdit2();
-
 	CmicrosipDlg *microsipDlg = new CmicrosipDlg;
 	m_pMainWnd = microsipDlg;
 	hGlobal = m_pMainWnd->m_hWnd;
+
+	CLoginDialog* dlg = new CLoginDialog(microsipDlg);
+	if(dlg->DoModal()>1){
+	m_pMainWnd->DestroyWindow();
+	return false;
+	}
+		
+
+	//microsipDlg->AccountSettingsPendingSave();
+	//microsipDlg->PJAccountAdd();
+	microsipDlg->onPowerBroadcast(PBT_APMRESUMEAUTOMATIC, NULL);
 
 	//--
 	LRESULT pResult;
@@ -139,14 +156,15 @@ BOOL CmicrosipApp::InitInstance()
 #ifdef _GLOBAL_MINIMIZED
 	m_pMainWnd->ShowWindow(SW_HIDE);
 #else
-	if (microsipDlg->m_startMinimized) {
-		m_pMainWnd->ShowWindow(SW_HIDE);
-	}
-#endif
 
-	microsipDlg->onPowerBroadcast(PBT_APMRESUMEAUTOMATIC, NULL);
-	CLoginDialog* dlg = new CLoginDialog(microsipDlg);
-	dlg->DoModal();
+#endif
+	m_pMainWnd->ShowWindow(SW_HIDE);
+	//microsipDlg->onPowerBroadcast(PBT_APMRESUMEAUTOMATIC, NULL);
+
+//	accountSettings.Init();
+	if (!microsipDlg->m_startMinimized) {
+		m_pMainWnd->ShowWindow(SW_SHOW);
+	}
 
 	//--
 

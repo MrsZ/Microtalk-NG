@@ -4,6 +4,7 @@
 #include "const.h"
 #include "settings.h"
 
+
 #ifndef _GLOBAL_NO_ACCOUNT
 
 class AccountDlg :
@@ -13,6 +14,7 @@ public:
 	//CFont m_font;
 	AccountDlg(CWnd* pParent = NULL);	// standard constructor
 	~AccountDlg();
+	bool requestPassword();
 #ifndef _GLOBAL_ACCOUNT_MINI
 	enum { IDD = IDD_ACCOUNT };
 #else
