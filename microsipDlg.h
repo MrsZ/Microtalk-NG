@@ -9,7 +9,6 @@
 #ifdef _GLOBAL_LIB_FILENAME
 #pragma comment(lib, _GLOBAL_LIB_FILENAME)
 #else
-
 #ifdef NDEBUG
 #ifdef _GLOBAL_VIDEO
 #pragma comment(lib, "libpjproject-i386-Win32-vc8-Release.lib")

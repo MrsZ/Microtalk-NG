@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="microsip"
+	Name="Microtalk-NG"
 	ProjectGUID="{BB46A3FD-3E25-44BF-9DED-36A8E838A095}"
 	RootNamespace="microsip"
 	Keyword="MFCProj"
@@ -44,8 +44,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Include&quot;;jsoncpp;&quot;D:\soft\pjproject-2.4.5\pjlib\include&quot;;&quot;D:\soft\pjproject-2.4.5\pjsip\include&quot;;&quot;D:\soft\pjproject-2.4.5\pjmedia\include&quot;;&quot;D:\soft\pjproject-2.4.5\pjnath\include&quot;;&quot;D:\soft\pjproject-2.4.5\pjlib-util\include&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
+				AdditionalIncludeDirectories="&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Include&quot;;jsoncpp;..\pjlib\include;..\pjsip\include;..\pjmedia\include;..\pjnath\include;&quot;..\pjlib-util\include&quot;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				DebugInformationFormat="4"
@@ -64,10 +64,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="imm32.lib version.lib winmm.lib strmbasd.lib"
-				AdditionalLibraryDirectories="c:\OpenSSL\lib;&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Lib&quot;;&quot;C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\Multimedia\DirectShow\BaseClasses\Debug&quot;;&quot;D:\soft\pjproject-2.4.5\lib&quot;;&quot;D:\soft\pjproject-2.4.5\third_party\lib&quot;;&quot;D:\soft\pjproject-2.4.5\third_party\ffmpeg\lib&quot;;&quot;D:\soft\pjproject-2.4.5\third_party\opencore-amrnb\lib&quot;"
+				AdditionalDependencies="imm32.lib version.lib winmm.lib strmbase.lib"
+				AdditionalLibraryDirectories="c:\OpenSSL\lib;&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Lib&quot;;../lib;../third_party/lib;../third_party/ffmpeg/lib;&quot;../third_party/opencore-amrnb/lib&quot;;&quot;C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\directshow\baseclasses\Release&quot;"
 				AdditionalManifestDependencies=""
-				IgnoreDefaultLibraryNames="libcmt.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -124,8 +123,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Include&quot;;jsoncpp;..\pjlib\include;..\pjsip\include;..\pjmedia\include;..\pjnath\include;&quot;..\pjlib-util\include&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
+				AdditionalIncludeDirectories="&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Include&quot;;jsoncpp;&quot;D:\Soft\pjproject-2.4.5\pjlib\include&quot;;&quot;D:\Soft\pjproject-2.4.5\pjsip\include&quot;;&quot;D:\Soft\pjproject-2.4.5\pjmedia\include&quot;;&quot;D:\Soft\pjproject-2.4.5\pjnath\include&quot;;&quot;D:\Soft\pjproject-2.4.5\pjlib-util\include&quot;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 			/>
@@ -143,12 +142,16 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="imm32.lib version.lib winmm.lib strmbase.lib"
-				AdditionalLibraryDirectories="c:\OpenSSL\lib;&quot;C:\Program Files\Microsoft SDKs\Windows\v6.0\Samples\Multimedia\DirectShow\BaseClasses\Release&quot;;&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Lib&quot;;&quot;D:\Soft\pjsip-mast\pjsip-master\lib\&quot;;../third_party/lib;../third_party/ffmpeg/lib;&quot;../third_party/opencore-amrnb/lib&quot;;&quot;C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\directshow\baseclasses\Release&quot;"
+				UseLibraryDependencyInputs="false"
+				AdditionalDependencies="ole32.lib imm32.lib winmm.lib strmbase.lib version.lib"
+				LinkIncremental="0"
+				AdditionalLibraryDirectories="c:\OpenSSL\lib;&quot;c:\Program Files\Microsoft SDKs\Windows\v7.1\Lib&quot;;../third_party/lib;../third_party/ffmpeg/lib;&quot;../third_party/opencore-amrnb/lib&quot;;&quot;C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\directshow\baseclasses\Release&quot;;&quot;D:\Soft\pjproject-2.4.5\lib&quot;;&quot;D:\Soft\pjproject-2.4.5\pjlib\lib&quot;;&quot;D:\Soft\pjproject-2.4.5\third_party\SDL2\lib\x86&quot;;&quot;D:\Soft\pjproject-2.4.5\third_party\ffmpeg\lib&quot;"
 				AdditionalManifestDependencies=""
+				IgnoreAllDefaultLibraries="false"
 				IgnoreDefaultLibraryNames=""
+				DelayLoadDLLs=""
 				SubSystem="2"
-				OptimizeReferences="2"
+				OptimizeReferences="1"
 				EnableCOMDATFolding="2"
 			/>
 			<Tool
@@ -207,7 +210,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Charges.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\addons\cJSON\cJSON.c"
+				>
+			</File>
+			<File
 				RelativePath=".\ClosableTabCtrl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Conference.cpp"
 				>
 			</File>
 			<File
@@ -302,6 +317,10 @@
 				RelativePath=".\VisualStylesXP.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\VoucherDialog.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -333,7 +352,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Charges.h"
+				>
+			</File>
+			<File
+				RelativePath=".\addons\cJSON\cJSON.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ClosableTabCtrl.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Conference.h"
 				>
 			</File>
 			<File
@@ -342,10 +373,6 @@
 			</File>
 			<File
 				RelativePath=".\Contacts.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CountryCodes.h"
 				>
 			</File>
 			<File
@@ -432,6 +459,10 @@
 				RelativePath=".\VisualStylesXP.h"
 				>
 			</File>
+			<File
+				RelativePath=".\VoucherDialog.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -443,11 +474,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\attended.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\res\away.ico"
 				>
 			</File>
 			<File
 				RelativePath=".\bitmap1.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\bitmap3.bmp"
 				>
 			</File>
 			<File
@@ -479,6 +518,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\default.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\res\dialog.rc2"
 				>
 			</File>
@@ -488,6 +531,10 @@
 			</File>
 			<File
 				RelativePath=".\res\exit.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\hold.ico"
 				>
 			</File>
 			<File
@@ -515,7 +562,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\logo2.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\logo_12.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\logo_12.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\menu.rc2"
+				>
+			</File>
+			<File
+				RelativePath=".\res\message.ico"
 				>
 			</File>
 			<File
@@ -528,6 +591,30 @@
 			</File>
 			<File
 				RelativePath=".\res\microsip.rc2"
+				>
+			</File>
+			<File
+				RelativePath=".\res\microtalk_icon.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\MicrotalNG.png"
+				>
+			</File>
+			<File
+				RelativePath=".\res\mutedin.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\mutedout.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\mutein.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\muteout.ico"
 				>
 			</File>
 			<File
@@ -559,7 +646,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\transfer.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\res\unknown.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\video.ico"
 				>
 			</File>
 		</Filter>
