@@ -4,6 +4,8 @@
 #include <pjsua-lib/pjsua.h>
 #include <pjsua-lib/pjsua_internal.h>
 
+#pragma comment(lib, "OleAcc")
+
 enum EUserWndMessages
 {
 	MYWM_FIRST_USER_MSG = (WM_USER + 0x100 + 1),

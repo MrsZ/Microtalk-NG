@@ -40,8 +40,8 @@ BEGIN_MESSAGE_MAP(Conference, CDialog)
 	//ON_NOTIFY(NM_RCLICK, IDC_CONFLIST, &Conference::OnNMRClickConflist)
 	ON_WM_CONTEXTMENU()
 	ON_COMMAND(ID_JOIN, &Conference::OnJoin)
-	ON_COMMAND(ID__DELETE, &Conference::OnDelete)
-	ON_COMMAND(ID__COPY, &Conference::OnCopy)
+	ON_COMMAND(ID_DELETE, &Conference::OnDelete)
+	ON_COMMAND(ID_COPY, &Conference::OnCopy)
 END_MESSAGE_MAP()
 
 
@@ -221,6 +221,11 @@ void Conference::OnDelete()
 	header+=((CmicrosipDlg*)GetParent())->getToken();
 	header+="&confno=";
 	header+=(CT2CA)confNum;
+
+#ifdef _DEBUG
+	_cprintf("Request: %s\n",header);
+#endif
+
 	CInternetSession session;
 	CHttpConnection *pConnection = session.GetHttpConnection(_T("89.163.142.253"));
 	char result[500];
